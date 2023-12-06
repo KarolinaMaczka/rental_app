@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+</head>
+<body>
+    <h1>Welcome to the Home Page!</h1>
+    {% if user.is_authenticated %}
+        <p><a href="{% url 'secret_page' %}">Go to Secret Page</a></p>
+    {% else %}
+        <p>Please <a href="{% url 'login' %}">login</a> to see secret content.</p>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+        <p>Hello, {{ user.username }}!</p>
+        <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+        <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+</body>
+</html>

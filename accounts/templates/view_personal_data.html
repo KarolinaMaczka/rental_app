@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Personal Data</title>
+</head>
+<body>
+    <h1>Your Personal Data</h1>
+    {% for data in user_data %}
+        <div>
+            <p><strong>First Name:</strong> {{ data.first_name }}</p>
+            <p><strong>Surname:</strong> {{ data.surname }}</p>
+            <p><strong>Address:</strong> {{ data.address }}</p>
+            <p><strong>Phone Number:</strong> {{ data.phone_number }}</p>
+        </div>
+        <hr>
+    {% empty %}
+        <p>No personal data found.</p>
+    {% endfor %}
+
+    <!-- Link back to home page or other relevant pages -->
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>
