@@ -1,0 +1,10 @@
+{% load static %}
+
+<form method="post" enctype="multipart/form-data" id="rentalForm">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update Rental</button>
+</form>
+
+<script src="{% static 'js/rental_validation.js' %}"></script>
+

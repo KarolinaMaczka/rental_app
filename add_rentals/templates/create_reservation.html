@@ -1,0 +1,30 @@
+<form method="post" id="reservationForm">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Book Reservation</button>
+</form>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert {{ message.tags }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<script>
+    document.getElementById('reservationForm').addEventListener('submit', function(event) {
+        var startDate = new Date(document.getElementsByName('start_date')[0].value);
+        var endDate = new Date(document.getElementsByName('end_date')[0].value);
+        var today = new Date();
+        today.setHours(0, 0, 0, 0); // Reset time to 00:00
+
+        if (startDate < today) {
+            event.preventDefault();
+            alert('Start date must be after today.');
+        } else if (endDate <= startDate) {
+            event.preventDefault();
+            alert('End date must be after start date.');
+        }
+    });
+</script>
