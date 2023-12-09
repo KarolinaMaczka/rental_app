@@ -11,5 +11,8 @@ urlpatterns = [
     path('add_personal_data/', views.add_personal_data, name='add_personal_data'),
     path('logout/', views.logout_view, name='logout'),
     path('view_personal_data/', views.view_personal_data, name='view_personal_data'),
+    path('change_password/', views.change_password, name='change_password'),
+    path('activate_new_password/<uidb64>/<token>/', views.activate_new_password, name='activate_new_password'),
+
 
 ]
