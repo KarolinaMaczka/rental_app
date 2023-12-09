@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import RentalForm, ReservationForm
 from .models import Rental, Reservation
-from django.db.models import Q
-from django.contrib import messages
+from django.http import JsonResponse
+
 @login_required
 def add_rental(request):
     if request.method == 'POST':
@@ -65,3 +65,9 @@ def create_reservation(request, rental_id):
         form = ReservationForm()
     return render(request, 'create_reservation.html', {'form': form, 'rental': rental})
 
+
+def get_booked_dates(request, rental_id):
+    rental = get_object_or_404(Rental, id=rental_id)
+    reservations = Reservation.objects.filter(rental=rental).values_list('start_date', 'end_date')
+    booked_dates = [{'start_date': res[0], 'end_date': res[1]} for res in reservations]
+    return JsonResponse({'booked_dates': booked_dates})

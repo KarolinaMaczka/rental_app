@@ -12,6 +12,6 @@ class ReservationForm(forms.ModelForm):
         model = Reservation
         fields = ['start_date', 'end_date']
         widgets = {
-            'start_date': forms.DateInput(attrs={'type': 'date'}),
-            'end_date': forms.DateInput(attrs={'type': 'date'}),
+            'start_date': forms.TextInput(attrs={'class': 'datepicker'}),
+            'end_date': forms.TextInput(attrs={'class': 'datepicker'}),
         }

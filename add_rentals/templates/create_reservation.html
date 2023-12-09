@@ -1,4 +1,13 @@
-<form method="post" id="reservationForm">
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+</head>
+
+{#nie działa to sprawdzanko :(#}
+<body>
+<form method="post" id="reservationForm" data-rental-id="{{ rental.id }}">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Book Reservation</button>
@@ -27,4 +36,29 @@
             alert('End date must be after start date.');
         }
     });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var rentalId = document.getElementById('reservationForm').getAttribute('data-rental-id');
+
+        fetch('/get_booked_dates/' + rentalId)
+            .then(response => response.json())
+            .then(data => {
+                let bookedDates = data.booked_dates;
+                let datepickerOptions = {
+                    beforeShowDay: function(date) {
+                        for (let i = 0; i < bookedDates.length; i++) {
+                            let start = new Date(bookedDates[i].start_date);
+                            let end = new Date(bookedDates[i].end_date);
+                            if (date >= start && date <= end) {
+                                return [false];
+                            }
+                        }
+                        return [true];
+                    }
+                };
+                $(".datepicker").datepicker(datepickerOptions);
+            });
+    });
+
 </script>
+</body>
