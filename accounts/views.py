@@ -23,8 +23,11 @@ def register(request):
         username = request.POST['username']
         email = request.POST['email']
         password = request.POST['password']
+        first_name = request.POST['first_name']
+        surname = request.POST['surname']
 
-        if not (username and email and password):
+
+        if not (username and email and password and first_name and surname):
             return render(request, 'register.html', {'error': 'All fields are required'})
 
         # Check if username already exists
@@ -37,7 +40,7 @@ def register(request):
 
         # Create user and user profile
         user = User.objects.create_user(username=username, email=email, password=password)
-        profile = UserProfile.objects.create(user=user)
+        profile = UserProfile.objects.create(user=user, first_name=first_name, surname=surname )
 
         # Send email with activation link
         activation_link = f"{request.build_absolute_uri('/activate/')}{profile.activation_token}"
@@ -83,11 +86,11 @@ def login_view(request):
 
 
 def home_page(request):
-    return render(request, 'home.html')  # Ensure you have a 'home.html' template
+    return render(request, 'home.html')
 
 
 def register_page(request):
-    return render(request, 'register.html')  # Ensure you have a 'home.html' template
+    return render(request, 'register.html')
 
 @login_required
 def secret_page(request):
@@ -151,7 +154,6 @@ def activate_new_password(request, uidb64, token):
         user = None
 
     if user is not None and default_token_generator.check_token(user, token):
-        # Here, set the new password for the user and save it
         user.is_active = True
         user.save()
         messages.success(request, 'Your password has been set.')

@@ -1,6 +1,9 @@
 <form method="post">
     {% csrf_token %}
     <input type="text" name="username" placeholder="Nazwa użytkownika">
+    <input type="text" name="first_name" placeholder="Imię">
+    <input type="text" name="surname" placeholder="Nazwisko">
+
     <input type="email" name="email" placeholder="Email">
     <input type="password" name="password" placeholder="Hasło">
     <button type="submit">Zarejestruj się</button>
