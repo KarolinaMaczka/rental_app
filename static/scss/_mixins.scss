@@ -1,0 +1,64 @@
+@import 'variables';
+
+@mixin button-style {
+  background-color: transparent;
+  color: black;
+  padding: $padding-small $padding-medium;
+  border: none;
+  border-radius: $border-radius;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  transition: $transition-parameters;
+  margin-left: $margin-horizontally;
+  margin-right: $margin-horizontally;
+  font-family: $font-stack;
+  font-weight: 900;
+  font-size: $header-font-size;
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+    opacity: $basic-opacity;
+    color: white;
+    i {
+      color: lighten($icon-color, 100%);
+    }
+  }
+
+  i {
+    color: $icon-color;
+    margin-right: 5px;
+    margin-left: 5px;
+  }
+
+  &:not(:has(i)) {
+    padding: $padding-small;
+  }
+}
+
+@mixin interactive-text {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    white-space: nowrap;
+    text-align: center;
+    transition: $transition-parameters;
+    font-family: $font-stack;
+    font-size: $base-font-size;
+
+    &:hover {
+        background-color: #f1f1f1;
+        color: black;
+    }
+}
+
+@mixin body-with-image{
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background-size: 100% auto;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  transition: $slow-transition;
+}

@@ -1,21 +1,47 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
     <title>Apartments</title>
 </head>
 <body>
-    <h1>Welcome to the Home Page!</h1>
-    {% if user.is_authenticated %}
-        <p><a href="{% url 'secret_page' %}">Go to Secret Page</a></p>
-    {% else %}
-        <p>Please <a href="{% url 'login' %}">login</a> to see secret content.</p>
-    {% endif %}
+    <header>
+        {% include 'header.html' %}
+    </header>
 
-    {% if user.is_authenticated %}
-        <p>Hello, {{ user.username }}!</p>
-        <a href="{% url 'logout' %}">Logout</a>
-    {% else %}
-        <a href="{% url 'login' %}">Login</a>
-    {% endif %}
+{#    <h1>Welcome to the Home Page!</h1>#}
+{#    {% if user.is_authenticated %}#}
+{#        <p><a href="{% url 'secret_page' %}">Go to Secret Page</a></p>#}
+{#    {% else %}#}
+{#        <p>Please <a href="{% url 'login' %}">login</a> to see secret content.</p>#}
+{#    {% endif %}#}
+{##}
+{#    {% if user.is_authenticated %}#}
+{#        <p>Hello, {{ user.username }}!</p>#}
+{#        <a href="{% url 'logout' %}">Logout</a>#}
+{#    {% else %}#}
+{#        <a href="{% url 'login' %}">Login</a>#}
+{#    {% endif %}#}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var backgroundImages = [
+            "url('media/basic/background1.jpg')",
+            "url('media/basic/background2.jpg')",
+            "url('media/basic/background3.jpg')",
+            "url('media/basic/background4.jpg')",
+        ];
+
+        var currentBackground = 0;
+        setInterval(function() {
+            currentBackground = (currentBackground + 1) % backgroundImages.length;
+            document.body.style.backgroundImage = backgroundImages[currentBackground];
+        }, 5000);
+    });
+</script>
+
 </body>
 </html>
