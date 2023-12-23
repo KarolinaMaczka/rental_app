@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 class Rental(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
-    description = models.TextField()
+    description = models.TextField(max_length=500)
     number_of_rooms = models.IntegerField()
     number_of_bathrooms = models.IntegerField()
     price_per_night = models.DecimalField(max_digits=6, decimal_places=2)
