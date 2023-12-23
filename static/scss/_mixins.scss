@@ -9,7 +9,7 @@
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  transition: $transition-parameters;
+  transition: $transition-parameters !important;
   margin-left: $margin-horizontally;
   margin-right: $margin-horizontally;
   font-family: $font-stack;
@@ -61,4 +61,5 @@
   background-position: bottom center;
   background-repeat: no-repeat;
   transition: $slow-transition;
+  opacity: 1;
 }

@@ -8,7 +8,7 @@
   color: $icon-color;
   display: flex;
   justify-content: flex-end;
-  transition: $slow-transition;
+  transition: $transition-parameters;
 }
 
 .header-with-gradient {
@@ -23,7 +23,7 @@
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 100%);
     pointer-events: none;
     z-index: -1;
-    transition: all 0.5s ease;
+    transition: $transition-parameters;
     opacity: 0;
   }
 

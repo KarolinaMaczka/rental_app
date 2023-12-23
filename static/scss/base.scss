@@ -6,8 +6,6 @@ body {
   background-image: url('../../media/basic/background1.jpg');
 }
 
-
-
 button {
   @include button-style;
 }
@@ -61,5 +59,12 @@ button {
     }
 }
 
+#content {
+    opacity: 1;
+    transition: opacity 2s ease;
+}
 
+.hidden {
+    opacity: 0;
+}
 

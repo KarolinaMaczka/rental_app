@@ -5,11 +5,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <script src="{% static 'js/fade_in.js' %}"></script>
 
 
     <title>Apartments</title>
 </head>
 <body>
+<div id="content">
     <header>
         {% include 'header.html' %}
     </header>
@@ -27,6 +29,7 @@
 {#    {% else %}#}
 {#        <a href="{% url 'login' %}">Login</a>#}
 {#    {% endif %}#}
+</div>
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -41,9 +44,11 @@
         setInterval(function() {
             currentBackground = (currentBackground + 1) % backgroundImages.length;
             document.body.style.backgroundImage = backgroundImages[currentBackground];
-        }, 5000);
+        }, 6500);
     });
 </script>
+
+{#<script src="{% static 'js/fade_in.js' %}"></script>#}
 
 </body>
 </html>
