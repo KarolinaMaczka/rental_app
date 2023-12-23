@@ -1,0 +1,158 @@
+
+
+@import 'variables';
+@import 'mixins';
+
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: $background-color;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  .close-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 40px;
+    color: $text-color;
+    text-decoration: none;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+
+    &:hover {
+      color: darken($text-color, 10%);
+    }
+  }
+
+  .h1 {
+    font-family: $font-stack;
+    font-size: 95px;
+    font-weight: 1800;
+    margin-bottom: 135px;
+  }
+
+  .forms-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1080px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    background-color: white;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 40px;
+
+    .login-form, .register-prompt {
+      padding: 30px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      h2 {
+        color: $text-color;
+        margin-bottom: 27px;
+        font-size: 1.35em;
+      }
+
+      form {
+        width: 100%;
+
+        input {
+          width: 95%;
+          padding: 10px;
+          margin-bottom: 10px;
+          border: 1px solid #ccc;
+          font-size: 1em;
+        }
+
+        button {
+          width: 100%;
+          padding: 14px;
+          margin-top: 14px;
+          background-color: $primary-color;
+          color: white;
+          border: none;
+          cursor: pointer;
+          font-size: 1.35em;
+        }
+      }
+
+      .error {
+        color: $error-color;
+        font-size: 1.35em;
+      }
+    }
+
+    .register-prompt {
+      background-color: #eee;
+      border-left: 1px solid #ddd;
+
+      .register-button {
+        display: block;
+        background-color: $primary-color;
+        color: white;
+        text-decoration: none;
+        padding: 14px 28px;
+        text-align: center;
+        margin-top: 27px;
+        border-radius: 5px;
+        font-size: 1.35em;
+      }
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 27px;
+      text-align: center;
+      font-size: 1.35em;
+
+      li {
+        padding: 7px 0;
+      }
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .container {
+    height: auto;
+    min-height: 100vh;
+    padding: 20px 0;
+    justify-content: flex-start;
+    overflow-y: auto;
+  }
+
+  .forms-container {
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+  }
+
+  .login-form, .register-prompt {
+    width: 90%;
+    margin-bottom: 20px;
+  }
+
+  .register-prompt {
+    border-left: none;
+    border-top: 1px solid #ddd;
+  }
+  .logo{
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
