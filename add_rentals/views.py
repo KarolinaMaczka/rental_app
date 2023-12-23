@@ -26,6 +26,11 @@ def list_rentals(request):
     rentals = Rental.objects.filter(user=request.user)
     return render(request, 'list_rentals.html', {'rentals': rentals})
 
+
+def all_rentals(request):
+    rentals = Rental.objects.all()
+    return render(request, 'all_rentals.html', {'rentals': rentals})
+
 @login_required
 def edit_rental(request, rental_id):
     rental = get_object_or_404(Rental, id=rental_id, user=request.user)
