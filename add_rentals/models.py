@@ -10,6 +10,8 @@ class Rental(models.Model):
     price_per_night = models.DecimalField(max_digits=6, decimal_places=2)
     max_guests = models.IntegerField()
     number_of_beds = models.IntegerField()
+    address_city = models.CharField(max_length=100)
+    address_street = models.CharField(max_length=100)
     images = models.ImageField(upload_to='rentals/')
 
 
@@ -18,6 +20,7 @@ class Reservation(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     start_date = models.DateField()
     end_date = models.DateField()
+    approved = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.rental} reserved by {self.user}'

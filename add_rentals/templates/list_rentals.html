@@ -8,6 +8,10 @@
     <p>Price per Night: {{ rental.price_per_night }}</p>
     <p>Max Guests: {{ rental.max_guests }}</p>
     <p>Number of Beds: {{ rental.number_of_beds }}</p>
+    <p>City: {{ rental.address_city }}</p>
+    <p>Street: {{ rental.address_street }}</p>
+
+
     <img src="{{ rental.images.url }}" alt="{{ rental.name }}" style="width:200px;height:150px;">
 </div>
 {% empty %}

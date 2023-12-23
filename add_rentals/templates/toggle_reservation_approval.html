@@ -1,0 +1,6 @@
+{% if user.is_authenticated and reservation.rental.user == user %}
+    <form method="post" action="{% url 'toggle_reservation_approval' reservation.id %}">
+        {% csrf_token %}
+        <button type="submit">{{ reservation.approved|yesno:"Disapprove,Approve" }}</button>
+    </form>
+{% endif %}
