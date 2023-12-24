@@ -6,44 +6,7 @@ body {
   background-image: url('../../media/basic/background1.jpg');
 }
 
-.dropdown {
-    position: relative;
-    display: inline-block;
-    transition: $transition-parameters;
 
-    .dropbtn {
-        background-color: transparent;
-        color: black;
-        padding: $padding-small $padding-medium;
-        font-size: $base-font-size;
-        border: none;
-        cursor: pointer;
-        transition: $transition-parameters;
-    }
-
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        background-color: black;
-        opacity: $basic-opacity;
-        min-width: 160px;
-        z-index: 1;
-        right: 0;
-        transition: $transition-parameters;
-
-        a {
-            @include interactive-text;
-        }
-    }
-
-    &:hover .dropdown-content {
-        display: block;
-    }
-
-    &:hover .dropbtn {
-      @include button-style;
-    }
-}
 
 //#content {
 //    opacity: 1;

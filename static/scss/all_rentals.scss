@@ -1,0 +1,51 @@
+@import 'variables';
+@import 'mixins';
+
+body {
+    margin-top: $header-height;
+}
+
+.rentals-grid-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.rentals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    justify-content: center;
+    width: 80%;
+}
+
+.rental-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    border: 1px solid lightgrey;
+    padding: 15px;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.3s ease;
+    height: 400px;
+    overflow: hidden;
+    margin: 20px;
+    min-width: 300px;
+
+    &:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+}
+
+.carousel {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+
+

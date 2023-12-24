@@ -2,20 +2,26 @@
 @import 'mixins';
 
 .normal-header {
-  background-color: $header-bg-color;
+  position: fixed !important;
   padding: $padding-medium;
   margin: 0;
   color: $icon-color;
   display: flex;
   justify-content: flex-end;
   transition: $transition-parameters;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 999 !important;
+  background-color: white;
+
 }
 
 .header-with-gradient {
    @extend .normal-header;
+   background-color: $header-bg-color;
    &::after {
     content: '';
-    position: absolute;
     top: 0;
     left: 0;
     right: 0;
@@ -45,5 +51,44 @@ button {
 
 .fa {
     font-size: $header-font-size;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    transition: $transition-parameters;
+
+    .dropbtn {
+        background-color: transparent;
+        color: black;
+        padding: $padding-small $padding-medium;
+        font-size: $base-font-size;
+        border: none;
+        cursor: pointer;
+        transition: $transition-parameters;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: black;
+        opacity: $basic-opacity;
+        min-width: 160px;
+        z-index: 1;
+        right: 0;
+        transition: $transition-parameters;
+
+        a {
+            @include interactive-text;
+        }
+    }
+
+    &:hover .dropdown-content {
+        display: block;
+    }
+
+    &:hover .dropbtn {
+      @include button-style;
+    }
 }
 

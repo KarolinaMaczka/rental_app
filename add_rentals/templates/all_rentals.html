@@ -1,25 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/all_rentals.css' %}">
+    <script src="{% static 'js/fade_in.js' %}"></script>
 
-<div class="rentals-grid">
+    <title>Apartments</title>
+</head>
 
-{% for rental in rentals %}
-    <div class="rental-item">
-        <h2>{{ rental.name }}</h2>
-        <p>{{ rental.description }}</p>
-        <p>Rooms: {{ rental.number_of_rooms }}</p>
-        <p>Bathrooms: {{ rental.number_of_bathrooms }}</p>
-        <p>Price per Night: {{ rental.price_per_night }}</p>
-        <p>Max Guests: {{ rental.max_guests }}</p>
-        <p>Number of Beds: {{ rental.number_of_beds }}</p>
-        <p>City: {{ rental.address_city }}</p>
-        <p>Street: {{ rental.address_street }}</p>
+<header>
+    {% include 'header.html' %}
+    <script>
+        function changeHeaderClass() {
+            var header = document.querySelector('.header-with-gradient');
+            if (header) {
+                header.className = 'normal-header';
+            }
+        }
+        changeHeaderClass();
+    </script>
+</header>
 
+<body>
+<div class="rentals-grid-wrapper">
 
-        {% for image in rental.images.all %}
-            <img src="{{ image.image.url }}" alt="{{ rental.name }}" style="width:200px;height:150px;">
-        {% endfor %}
+    <div class="rentals-grid">
+
+    {% for rental in rentals %}
+        <div class="rental-item" id="rental-{{ rental.id }}">
+            <h2>{{ rental.name }}</h2>
+{#            <p>{{ rental.description }}</p>#}
+{#            <p>Rooms: {{ rental.number_of_rooms }}</p>#}
+{#            <p>Bathrooms: {{ rental.number_of_bathrooms }}</p>#}
+            <p>City: {{ rental.address_city }}</p>
+            <p>Price per Night: {{ rental.price_per_night }}</p>
+{#            <p>Max Guests: {{ rental.max_guests }}</p>#}
+{#            <p>Number of Beds: {{ rental.number_of_beds }}</p>#}
+{#            <p>Street: {{ rental.address_street }}</p>#}
+
+            <div class="carousel">
+                <button onclick="prevImage('rental-{{ rental.id }}')"> < </button>
+                <div class="image-container">
+                    {% for image in rental.images.all %}
+                        <img src="{{ image.image.url }}" alt="{{ rental.name }}" class="carousel-image" style="width:250px;height:180px;{{ forloop.first|yesno:',display:none;' }}">
+                    {% endfor %}
+                </div>
+                <button onclick="nextImage('rental-{{ rental.id }}')"> > </button>
+            </div>
+
+            <a href="{% url 'edit_rental' rental.id %}" class="see-more-btn">See More</a>
+
+        </div>
+
+    {% empty %}
+    <p>No rentals found.</p>
+    {% endfor %}
+
     </div>
-{% empty %}
-<p>No rentals found.</p>
-{% endfor %}
 
 </div>
+
+<script>
+    window.onload = function() {
+        {% for rental in rentals %}
+            window['currentImageIndex_{{ rental.id }}'] = 0;
+            updateCarousel('{{ rental.id }}');
+        {% endfor %}
+    };
+
+    function updateCarousel(rentalId) {
+        var images = document.querySelectorAll('#' + rentalId + ' .carousel-image');
+        images.forEach((img, index) => {
+            img.style.display = index === window['currentImageIndex_' + rentalId] ? 'block' : 'none';
+        });
+    }
+
+    function nextImage(rentalId) {
+        if (window['currentImageIndex_' + rentalId] === undefined) window['currentImageIndex_' + rentalId] = 0;
+        var images = document.querySelectorAll('#' + rentalId + ' .carousel-image');
+        window['currentImageIndex_' + rentalId] = (window['currentImageIndex_' + rentalId] + 1) % images.length;
+        updateCarousel(rentalId);
+    }
+
+    function prevImage(rentalId) {
+        if (window['currentImageIndex_' + rentalId] === undefined) window['currentImageIndex_' + rentalId] = 0;
+        var images = document.querySelectorAll('#' + rentalId + ' .carousel-image');
+        window['currentImageIndex_' + rentalId] = (window['currentImageIndex_' + rentalId] - 1 + images.length) % images.length;
+        updateCarousel(rentalId);
+    }
+    {% for rental in rentals %}
+        window['currentImageIndex_{{ rental.id }}'] = 0;
+        updateCarousel('{{ rental.id }}');
+    {% endfor %}
+
+</script>
+
+</body>
+</html>
