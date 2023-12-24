@@ -6,7 +6,13 @@
     <link rel="stylesheet" href="{% static 'css/header.css' %}">
     <link rel="stylesheet" href="{% static 'css/register.css' %}">
     <script src="{% static 'js/fade_in.js' %}"></script>
-    <script>
+
+    <title>Apartments</title>
+</head>
+
+ <header>
+        {% include 'header.html' %}
+     <script>
         function changeHeaderClass() {
             var header = document.querySelector('.header-with-gradient');
             if (header) {
@@ -15,36 +21,30 @@
         }
         changeHeaderClass();
     </script>
-
-
-    <title>Apartments</title>
-</head>
-<body>
-
- <header>
-        {% include 'header.html' %}
     </header>
 
-<div id="content">
-    <h1>Register now and rent your dream place!</h1>
+<body>
 
-    <form class="standard-form" method="post">
-        {% csrf_token %}
-        <input type="text" name="username" placeholder="Username">
-        <input type="text" name="first_name" placeholder="Name">
-        <input type="text" name="surname" placeholder="Surname">
+    <div id="content">
+        <h1>Register now and rent your dream place!</h1>
 
-        <input type="email" name="email" placeholder="Email">
-        <input type="password" name="password" placeholder="Password">
-        <button type="submit">Register</button>
+        <form class="standard-form" method="post">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Username">
+            <input type="text" name="first_name" placeholder="Name">
+            <input type="text" name="surname" placeholder="Surname">
 
-        {% if error %}
-            <p class="error">{{ error }}</p>
-        {% endif %}
-    </form>
+            <input type="email" name="email" placeholder="Email">
+            <input type="password" name="password" placeholder="Password">
+            <button type="submit">Register</button>
+
+            {% if error %}
+                <p class="error">{{ error }}</p>
+            {% endif %}
+        </form>
 
 
-</div>
+    </div>
 
 </body>
 </html>
