@@ -6,20 +6,6 @@ body {
   background-image: url('../../media/basic/background1.jpg');
 }
 
-button {
-  @include button-style;
-}
-
-.fa {
-    font-size: $header-font-size;
-}
-
-#left-button{
-  @include button-style;
-  position: absolute;
-  left: 5px;
-}
-
 .dropdown {
     position: relative;
     display: inline-block;
@@ -59,12 +45,12 @@ button {
     }
 }
 
-#content {
-    opacity: 1;
-    transition: opacity 2s ease;
-}
-
-.hidden {
-    opacity: 0;
-}
+//#content {
+//    opacity: 1;
+//    transition: opacity 2s ease;
+//}
+//
+//.hidden {
+//    opacity: 0;
+//}
 

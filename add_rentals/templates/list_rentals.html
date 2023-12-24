@@ -12,8 +12,11 @@
     <p>Street: {{ rental.address_street }}</p>
 
 
-    <img src="{{ rental.images.url }}" alt="{{ rental.name }}" style="width:200px;height:150px;">
+    {% for image in rental.images.all %}
+        <img src="{{ image.image.url }}" alt="{{ rental.name }}" style="width:200px;height:150px;">
+    {% endfor %}
 </div>
 {% empty %}
-<p>No rentals found.</p>
+    <p>You haven't created any rentals yet :(</p>
+    <a href="{% url 'add_rental' %}">Click here to create a new rental.</a>
 {% endfor %}

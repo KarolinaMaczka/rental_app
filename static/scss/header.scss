@@ -20,7 +20,7 @@
     left: 0;
     right: 0;
     bottom: 50%;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 100%);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 100%);
     pointer-events: none;
     z-index: -1;
     transition: $transition-parameters;
@@ -32,3 +32,18 @@
     opacity: 0.8;
   }
 }
+
+#left-button{
+  @include button-style;
+  position: absolute;
+  left: 5px;
+}
+
+button {
+  @include button-style;
+}
+
+.fa {
+    font-size: $header-font-size;
+}
+

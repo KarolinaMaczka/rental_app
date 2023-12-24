@@ -60,6 +60,90 @@
   background-size: cover;
   background-position: bottom center;
   background-repeat: no-repeat;
-  transition: $slow-transition;
+  transition: $transition-parameters;
+  transition: background-image 2s ease-in-out !important;
   opacity: 1;
+}
+
+@mixin form-input{
+  width: 95%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+  border-left-color: transparent;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  font-size: 1em;
+}
+
+@mixin form-button{
+  padding: 14px;
+  background-color: $primary-color;
+  color: white;
+  border: 1px solid $primary-color;
+  cursor: pointer;
+  font-size: 1.35em;
+  text-align: center;
+  border-radius: 5px;
+   &:hover {
+    background-color: lighten($primary-color, 20%);
+    color: darken(white, 20%);
+    border-color: lighten($primary-color, 20%);
+  }
+}
+
+@mixin bold-text{
+  font-family: $font-stack;
+  font-weight: 800;
+  color: $text-color;
+}
+
+@mixin form-text-h2{
+
+  margin-bottom: 27px;
+  font-size: 1.45em;
+}
+
+@mixin standard-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        background-color: transparent;
+        border: none;
+        border-bottom: 2px solid black;
+        padding: 10px;
+        margin: 10px 0;
+        width: 80%;
+        box-sizing: border-box;
+
+        &:focus {
+            outline: none;
+            border-bottom-color: gray;
+        }
+    }
+
+    button[type="submit"] {
+      margin-top: 20px;
+        @include form-button;
+    }
+
+    .error {
+        color: $error-color;
+        margin-top: 20px;
+    }
+}
+
+
+@mixin large-title {
+  font-family: $font-stack;
+  font-size: 40px;
+  font-weight: 1400;
+  margin-bottom: 30px;
+  text-align: center;
 }

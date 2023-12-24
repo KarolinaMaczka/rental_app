@@ -1,19 +1,25 @@
+
+<div class="rentals-grid">
+
 {% for rental in rentals %}
-<div>
-    <h2>{{ rental.name }}</h2>
-    <a href="{% url 'edit_rental' rental.id %}">Edit</a>
-    <p>{{ rental.description }}</p>
-    <p>Rooms: {{ rental.number_of_rooms }}</p>
-    <p>Bathrooms: {{ rental.number_of_bathrooms }}</p>
-    <p>Price per Night: {{ rental.price_per_night }}</p>
-    <p>Max Guests: {{ rental.max_guests }}</p>
-    <p>Number of Beds: {{ rental.number_of_beds }}</p>
-    <p>City: {{ rental.address_city }}</p>
-    <p>Street: {{ rental.address_street }}</p>
+    <div class="rental-item">
+        <h2>{{ rental.name }}</h2>
+        <p>{{ rental.description }}</p>
+        <p>Rooms: {{ rental.number_of_rooms }}</p>
+        <p>Bathrooms: {{ rental.number_of_bathrooms }}</p>
+        <p>Price per Night: {{ rental.price_per_night }}</p>
+        <p>Max Guests: {{ rental.max_guests }}</p>
+        <p>Number of Beds: {{ rental.number_of_beds }}</p>
+        <p>City: {{ rental.address_city }}</p>
+        <p>Street: {{ rental.address_street }}</p>
 
 
-    <img src="{{ rental.images.url }}" alt="{{ rental.name }}" style="width:200px;height:150px;">
-</div>
+        {% for image in rental.images.all %}
+            <img src="{{ image.image.url }}" alt="{{ rental.name }}" style="width:200px;height:150px;">
+        {% endfor %}
+    </div>
 {% empty %}
 <p>No rentals found.</p>
 {% endfor %}
+
+</div>

@@ -1,10 +1,30 @@
 {% load static %}
-
-<form method="post" enctype="multipart/form-data" id="rentalForm">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Rental</title>
+</head>
+<body>
+    <form method="post" enctype="multipart/form-data" id="rentalForm">
     {% csrf_token %}
     {{ form.as_p }}
+    <div id="imageUploadContainer">
+    </div>
+    <button type="button" id="addImage">Add Another Image</button>
     <button type="submit">Update Rental</button>
 </form>
 
+<script>
+    document.getElementById('addImage').addEventListener('click', function() {
+        var container = document.getElementById('imageUploadContainer');
+        var input = document.createElement('input');
+        input.type = 'file';
+        input.name = 'images';
+        container.appendChild(input);
+    });
+</script>
 <script src="{% static 'js/rental_validation.js' %}"></script>
 
+
+</body>
+</html>

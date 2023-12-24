@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import RentalForm, ReservationForm
-from .models import Rental, Reservation
+from .models import Rental, Reservation, Image
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
@@ -15,6 +15,10 @@ def add_rental(request):
             rental = form.save(commit=False)
             rental.user = request.user
             rental.save()
+
+            for file in request.FILES.getlist('images'):
+                Image.objects.create(rental=rental, image=file)
+
             return redirect('home')
     else:
         form = RentalForm()
@@ -38,6 +42,12 @@ def edit_rental(request, rental_id):
         form = RentalForm(request.POST, request.FILES, instance=rental)
         if form.is_valid():
             form.save()
+            if request.FILES.getlist('images'):
+                rental.images.all().delete()
+
+                for file in request.FILES.getlist('images'):
+                    Image.objects.create(rental=rental, image=file)
+
             return redirect('list_rentals')
     else:
         form = RentalForm(instance=rental)

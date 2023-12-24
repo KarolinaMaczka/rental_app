@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Rental(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
@@ -12,7 +13,11 @@ class Rental(models.Model):
     number_of_beds = models.IntegerField()
     address_city = models.CharField(max_length=100)
     address_street = models.CharField(max_length=100)
-    images = models.ImageField(upload_to='rentals/')
+
+
+class Image(models.Model):
+    rental = models.ForeignKey(Rental, related_name='images', on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='rentals/')
 
 
 class Reservation(models.Model):

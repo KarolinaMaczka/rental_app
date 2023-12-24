@@ -1,0 +1,21 @@
+@import 'variables';
+@import 'mixins';
+
+.standard-form{
+  @include standard-form
+}
+
+#content{
+  width: 60%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  border: 1px solid lightgrey;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+
+  h1 {
+    @include large-title;
+  }
+}
