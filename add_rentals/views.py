@@ -30,10 +30,46 @@ def list_rentals(request):
     rentals = Rental.objects.filter(user=request.user)
     return render(request, 'list_rentals.html', {'rentals': rentals})
 
+from django.shortcuts import render
+from .models import Rental
 
 def all_rentals(request):
+    # Query for unique cities from all rentals
+    unique_cities = Rental.objects.values_list('address_city', flat=True).distinct()
+
     rentals = Rental.objects.all()
-    return render(request, 'all_rentals.html', {'rentals': rentals})
+
+    # Apply filters
+    city = request.GET.get('city')
+    if city:
+        rentals = rentals.filter(address_city=city)
+
+    bathrooms = request.GET.get('bathrooms')
+    if bathrooms and bathrooms.isdigit():
+        rentals = rentals.filter(number_of_bathrooms__gt=int(bathrooms))
+
+    rooms = request.GET.get('rooms')
+    if rooms and rooms.isdigit():
+        rentals = rentals.filter(number_of_rooms__gt=int(rooms))
+
+    price = request.GET.get('price')
+    if price and price.isdigit():
+        rentals = rentals.filter(price_per_night__lte=float(price))
+
+    guests = request.GET.get('guests')
+    if guests and guests.isdigit():
+        rentals = rentals.filter(max_guests__lte=int(guests))
+
+    beds = request.GET.get('beds')
+    if beds and beds.isdigit():
+        rentals = rentals.filter(number_of_beds__gte=int(beds))
+
+    return render(request, 'all_rentals.html', {
+        'rentals': rentals,
+        'unique_cities': unique_cities
+    })
+
+
 
 @login_required
 def edit_rental(request, rental_id):

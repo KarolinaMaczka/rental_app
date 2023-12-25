@@ -92,16 +92,11 @@
   }
 }
 
-@mixin bold-text{
-  font-family: $font-stack;
-  font-weight: 800;
-  color: $text-color;
-}
-
 @mixin form-text-h2{
-
-  margin-bottom: 27px;
+  font-family: $font-stack;
+  margin-bottom: 20px;
   font-size: 1.45em;
+  font-weight: 900;
 }
 
 @mixin standard-form {
@@ -146,4 +141,11 @@
   font-weight: 1400;
   margin-bottom: 30px;
   text-align: center;
+}
+
+@mixin horizontal-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }

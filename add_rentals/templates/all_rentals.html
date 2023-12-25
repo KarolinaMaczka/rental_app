@@ -24,33 +24,95 @@
 </header>
 
 <body>
+
+<div class="main-container">
+    <div class="filter-section">
+        <form method="get" action="{% url 'all_rentals' %}">
+            <table>
+                <tr>
+                    <td><label for="city-input">City:</label></td>
+                    <td>
+                        <input list="city-list" id="city-input" name="city" value="{{ request.GET.city }}" placeholder="Type to search..." autocomplete="off">
+                        <datalist id="city-list">
+                            {% for city in unique_cities %}
+                                <option value="{{ city }}"></option>
+                            {% endfor %}
+                        </datalist>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="bathrooms">Bathrooms (more than):</label></td>
+                    <td>
+                        <select name="bathrooms" id="bathrooms">
+                            <option value="">Any</option>
+                            <option value="1" {% if request.GET.bathrooms == "1" %}selected{% endif %}>1</option>
+                            <option value="2" {% if request.GET.bathrooms == "2" %}selected{% endif %}>2</option>
+                            <option value="3" {% if request.GET.bathrooms == "3" %}selected{% endif %}>3</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="rooms">Rooms (more than):</label></td>
+                    <td>
+                        <select name="rooms" id="rooms">
+                            <option value="">Any</option>
+                            <option value="1" {% if request.GET.rooms == "1" %}selected{% endif %}>1</option>
+                            <option value="2" {% if request.GET.rooms == "2" %}selected{% endif %}>2</option>
+                            <option value="3" {% if request.GET.rooms == "3" %}selected{% endif %}>3</option>
+                            <option value="4" {% if request.GET.rooms == "4" %}selected{% endif %}>4</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="price">Max Price per Night:</label></td>
+                    <td>
+                        <input type="number" id="price" name="price" min="0" value="{{ request.GET.price }}">
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="guests">Max Guests:</label></td>
+                    <td>
+                        <input type="number" id="guests" name="guests" min="1" value="{{ request.GET.guests }}">
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="beds">Number of Beds:</label></td>
+                    <td>
+                        <input type="number" id="beds" name="beds" min="1" value="{{ request.GET.beds }}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="Filter">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
 <div class="rentals-grid-wrapper">
 
     <div class="rentals-grid">
 
     {% for rental in rentals %}
         <div class="rental-item" id="rental-{{ rental.id }}">
-            <h2>{{ rental.name }}</h2>
-{#            <p>{{ rental.description }}</p>#}
-{#            <p>Rooms: {{ rental.number_of_rooms }}</p>#}
-{#            <p>Bathrooms: {{ rental.number_of_bathrooms }}</p>#}
-            <p>City: {{ rental.address_city }}</p>
-            <p>Price per Night: {{ rental.price_per_night }}</p>
-{#            <p>Max Guests: {{ rental.max_guests }}</p>#}
-{#            <p>Number of Beds: {{ rental.number_of_beds }}</p>#}
-{#            <p>Street: {{ rental.address_street }}</p>#}
-
             <div class="carousel">
                 <button onclick="prevImage('rental-{{ rental.id }}')"> < </button>
                 <div class="image-container">
                     {% for image in rental.images.all %}
-                        <img src="{{ image.image.url }}" alt="{{ rental.name }}" class="carousel-image" style="width:250px;height:180px;{{ forloop.first|yesno:',display:none;' }}">
+                        <img src="{{ image.image.url }}" alt="{{ rental.name }}" class="carousel-image" style="{{ forloop.first|yesno:',display:none;' }}">
                     {% endfor %}
                 </div>
                 <button onclick="nextImage('rental-{{ rental.id }}')"> > </button>
             </div>
 
-            <a href="{% url 'edit_rental' rental.id %}" class="see-more-btn">See More</a>
+            <p class="bold-text"> {{ rental.name }} </p>
+            <p>City: {{ rental.address_city }}</p>
+
+            <div class="horizontal-div">
+                <a href="{% url 'edit_rental' rental.id %}" class="see-more-btn">See More</a>
+                <p>{{ rental.price_per_night }}$</p>
+            </div>
 
         </div>
 
@@ -62,7 +124,36 @@
 
 </div>
 
+</div>
+
+
+
+
+
 <script>
+
+    document.getElementById('city-input').addEventListener('change', function() {
+        var optionFound = false,
+            datalist = this.list;
+
+        if (this.value === '') {
+            this.setCustomValidity('');
+            return;
+        }
+
+        for (var j = 0; j < datalist.options.length; j++) {
+            if (this.value == datalist.options[j].value) {
+                optionFound = true;
+                break;
+            }
+        }
+        if (optionFound) {
+            this.setCustomValidity('');
+        } else {
+            this.setCustomValidity('Please select a valid city');
+        }
+    });
+
     window.onload = function() {
         {% for rental in rentals %}
             window['currentImageIndex_{{ rental.id }}'] = 0;
