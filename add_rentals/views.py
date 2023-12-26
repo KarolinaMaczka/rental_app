@@ -30,8 +30,6 @@ def list_rentals(request):
     rentals = Rental.objects.filter(user=request.user)
     return render(request, 'list_rentals.html', {'rentals': rentals})
 
-from django.shortcuts import render
-from .models import Rental
 
 def all_rentals(request):
     # Query for unique cities from all rentals
@@ -46,11 +44,11 @@ def all_rentals(request):
 
     bathrooms = request.GET.get('bathrooms')
     if bathrooms and bathrooms.isdigit():
-        rentals = rentals.filter(number_of_bathrooms__gt=int(bathrooms))
+        rentals = rentals.filter(number_of_bathrooms__gte=int(bathrooms))
 
     rooms = request.GET.get('rooms')
     if rooms and rooms.isdigit():
-        rentals = rentals.filter(number_of_rooms__gt=int(rooms))
+        rentals = rentals.filter(number_of_rooms__gte=int(rooms))
 
     price = request.GET.get('price')
     if price and price.isdigit():
@@ -58,7 +56,7 @@ def all_rentals(request):
 
     guests = request.GET.get('guests')
     if guests and guests.isdigit():
-        rentals = rentals.filter(max_guests__lte=int(guests))
+        rentals = rentals.filter(max_guests__gte=int(guests))
 
     beds = request.GET.get('beds')
     if beds and beds.isdigit():
@@ -136,4 +134,10 @@ def toggle_reservation_approval(request, reservation_id):
         messages.error(request, 'You are not authorized to approve this reservation.')
 
     return redirect('list_rentals')
+
+
+def one_rental(request, rental_id):
+    rental = get_object_or_404(Rental, id=rental_id)
+    return render(request, 'one_rental.html', {'rental': rental})
+
 

@@ -9,5 +9,6 @@ urlpatterns = [
     path('get_booked_dates/<int:rental_id>/', views.get_booked_dates, name='get_booked_dates'),
     path('reservation/<int:reservation_id>/toggle_approval/', views.toggle_reservation_approval, name='toggle_reservation_approval'),
     path('rentals', views.all_rentals, name='all_rentals'),
+    path('one_rental/<int:rental_id>/', views.one_rental, name='one_rental'),
 
 ]

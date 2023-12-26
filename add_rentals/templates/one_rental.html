@@ -1,0 +1,3 @@
+{% for image in rental.images.all %}
+    <img src="{{ image.image.url }}" alt="{{ rental.name }}" class="carousel-image" style="{{ forloop.first|yesno:',display:none;' }}">
+{% endfor %}

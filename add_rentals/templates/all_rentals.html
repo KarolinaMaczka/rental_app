@@ -70,7 +70,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><label for="guests">Max Guests:</label></td>
+                    <td><label for="guests">Number of Guests:</label></td>
                     <td>
                         <input type="number" id="guests" name="guests" min="1" value="{{ request.GET.guests }}">
                     </td>
@@ -110,7 +110,7 @@
             <p>City: {{ rental.address_city }}</p>
 
             <div class="horizontal-div">
-                <a href="{% url 'edit_rental' rental.id %}" class="see-more-btn">See More</a>
+                <a href="{% url 'one_rental' rental.id %}" class="see-more-btn">See More</a>
                 <p>{{ rental.price_per_night }}$</p>
             </div>
 
