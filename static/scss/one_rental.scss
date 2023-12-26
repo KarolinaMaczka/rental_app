@@ -1,0 +1,138 @@
+@import 'variables';
+@import 'mixins';
+
+html {
+    font-family: $font-stack;
+    @include scroll-bar;
+    body {
+      margin-top: $header-height;
+      .main-container {
+        @include vertical-div;
+        .product-details {
+          .image-container {
+            display: flex;
+            .image-list {
+              overflow-y: scroll;
+              white-space: nowrap;
+              padding: 10px;
+              @include vertical-div;
+              justify-content: start;
+              background-color: white;
+              height: 80vh;
+              @include scroll-bar;
+
+              .image-wrapper {
+                display: inline-block;
+                width: 100px;
+                height: 100px;
+                background-color: white;
+                margin-right: 10px;
+                img {
+                  max-width: 100%;
+                  max-height: 100%;
+                  object-fit: contain;
+                  &:hover {
+                    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+                    cursor: pointer;
+                  }
+                }
+              }
+            }
+
+            .main-image {
+              padding: 20px;
+              width: 50vw;
+              height: 80vh;
+              background-color: white;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+              img {
+                max-width: 100%;
+                max-height: 100%;
+                object-fit: contain;
+              }
+            }
+          }
+        }
+        .product-info {
+          width: 90%;
+          @include horizontal-div;
+          @media (max-width: 800px) {
+            @include vertical-div;
+            align-self: center;
+            table{
+              width: 80%;
+            }
+            .desc {
+              align-self: center;
+
+              h2 {
+                @include form-text-h2;
+                text-align: center;
+              }
+
+              p {
+                text-align: justify;
+              }
+              width: 80%;
+            }
+          }
+          @media (min-width: 800px) {
+            table {
+              width: 50%;
+              @include standard-table;
+            }
+            .desc {
+              align-self: start;
+
+              h2 {
+                @include form-text-h2;
+                text-align: left;
+              }
+
+              p {
+                text-align: justify;
+              }
+
+              width: 50%;
+              padding: 0 50px;
+
+            }
+          }
+        }
+      }
+      .owner-details-wrapper {
+        @include horizontal-div;
+        align-items: start;
+        margin: 60px;
+        .owner-details {
+          width: 50%;
+          align-items: center;
+          justify-content: center;
+
+          table {
+            width: 90%;
+            @include standard-table;
+          }
+
+          .bold-text {
+            @include form-text-h2;
+            font-size: 1em;
+          }
+        }
+
+        .button-div {
+          width:50%;
+          .create-res-btn {
+            width: fit-content;
+            @include button-style;
+            text-decoration: none;
+            font-size: 1em;
+            background-color: lightgray;
+          }
+        }
+      }
+  }
+}

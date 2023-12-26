@@ -1,3 +1,190 @@
-{% for image in rental.images.all %}
-    <img src="{{ image.image.url }}" alt="{{ rental.name }}" class="carousel-image" style="{{ forloop.first|yesno:',display:none;' }}">
-{% endfor %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/one_rental.css' %}">
+
+    <script src="{% static 'js/fade_in.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <title>Apartments</title>
+</head>
+
+<header>
+    {% include 'header.html' %}
+    <script>
+        function changeHeaderClass() {
+            var header = document.querySelector('.header-with-gradient');
+            if (header) {
+                header.className = 'normal-header';
+            }
+        }
+        changeHeaderClass();
+    </script>
+</header>
+
+<body>
+    <div class="main-container">
+        <div class="product-details">
+            <div class="image-container">
+                <div class="image-list">
+                    {% for image in rental.images.all %}
+                        <div class="image-wrapper">
+                        <img src="{{ image.image.url }}" alt="{{ rental.name }}" class="clickable-image">
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="main-image">
+                    {% for image in rental.images.all %}
+                        <img src="{{ image.image.url }}" alt="{{ rental.name }}" class="carousel-image" style="{{ forloop.first|yesno:',display:none;' }}">
+                    {% endfor %}
+                </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const clickableImages = document.querySelectorAll('.clickable-image');
+
+                    clickableImages.forEach(function(img) {
+                        img.addEventListener('click', function() {
+                            const clickedImageUrl = img.getAttribute('src');
+                            const carouselImages = document.querySelectorAll('.carousel-image');
+                            carouselImages.forEach(function(carouselImg) {
+                                carouselImg.style.display = 'none';
+                            });
+
+                            const matchingCarouselImage = Array.from(carouselImages).find(function(carouselImg) {
+                                return carouselImg.getAttribute('src') === clickedImageUrl;
+                            });
+
+                            if (matchingCarouselImage) {
+                                matchingCarouselImage.style.display = '';
+                            }
+                        });
+                    });
+                });
+            </script>
+
+            </div>
+
+        </div>
+
+            <div class="product-info">
+                <table>
+                    <tr>
+                        <td>
+                            <p>Price:</p>
+                        </td>
+                        <td>
+                            {{ rental.price_per_night }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Bedrooms:</p>
+                        </td>
+                        <td>
+                            {{ rental.number_of_rooms }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Beds:</p>
+                        </td>
+                        <td>
+                            {{ rental.number_of_beds }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Bathrooms:</p>
+                        </td>
+                        <td>
+                            {{ rental.number_of_bathrooms }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Max Guests:</p>
+                        </td>
+                        <td>
+                            {{ rental.max_guests }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>City:</p>
+                        </td>
+                        <td>
+                            <p>{{ rental.address_city }}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Street:</p>
+                        </td>
+                        <td>
+                            {{ rental.address_street }}
+                        </td>
+                    </tr>
+                </table>
+
+                <div class="desc">
+                    <h2>Description</h2>
+                    <p>{{ rental.description }}</p>
+                </div>
+
+            </div>
+
+    </div>
+
+    <div class="owner-details-wrapper">
+        <div class="owner-details">
+            <h2>Owner details</h2>
+
+            <table>
+                <tr>
+                    <td>
+                        <p>name</p>
+                    </td>
+                    <td>
+                        {% if rental.user.first_name %}
+                            <p>{{ rental.user.first_name }}</p>
+                        {% else %}
+                             <p>No name available</p>
+                        {% endif %}
+                    </td>
+                </tr>
+            <tr>
+                <td>
+                    <p>surname</p>
+                </td>
+                <td>
+                     {% if rental.user.surname %}
+                        <p>{{ rental.user.surname }}</p>
+                     {% else %}
+                         <p>No surname available</p>
+                     {% endif %}
+                </td>
+             </tr>
+            </table>
+
+            <p class="bold-text">Contact</p>
+             {% if phone_numbers %}
+                {% for phone_number in phone_numbers %}
+                    {{ phone_number|default:"" }}
+                {% endfor %}
+            {% else %}
+                <p>No phone numbers available.</p>
+            {% endif %}
+            </div>
+
+        <div class="button-div">
+            <a href="{% url 'create_reservation' rental.id %}" class="create-res-btn">Create Reservation</a>
+        </div>
+
+    </div>
+
+</body>

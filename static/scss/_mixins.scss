@@ -149,3 +149,57 @@
   align-items: center;
   justify-content: center;
 }
+
+@mixin vertical-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@mixin scroll-bar {
+  &::-webkit-scrollbar {
+      width: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 10px;
+
+      &:hover {
+          background: #555;
+      }
+  }
+}
+
+@mixin standard-table {
+  border-collapse: collapse;
+  margin-top: 20px;
+
+  tr {
+      border-bottom: 1px solid #ddd;
+
+      &:last-child {
+          border-bottom: none;
+      }
+  }
+
+  td {
+      padding: 10px;
+      vertical-align: top;
+
+      &:first-child {
+          font-weight: bold;
+          width: 30%;
+          color: #333;
+      }
+
+      p {
+          margin: 0;
+      }
+  }
+}

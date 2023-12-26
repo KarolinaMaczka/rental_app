@@ -1,12 +1,28 @@
+{% load static %}
+
 <head>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
 </head>
 
+<header>
+    {% include 'header.html' %}
+    <script>
+        function changeHeaderClass() {
+            var header = document.querySelector('.header-with-gradient');
+            if (header) {
+                header.className = 'normal-header';
+            }
+        }
+        changeHeaderClass();
+    </script>
+</header>
+
 <body>
-<form method="post" id="reservationForm" data-rental-id="{{ rental.id }}">
+<form method="post" id="reservationForm" data-rental-id="{{ rental.id }}" class="standard-form">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Book Reservation</button>
@@ -60,4 +76,4 @@
     });
 
 </script>
-</body>
+

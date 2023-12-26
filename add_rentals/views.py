@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+
+from accounts.models import UserProfile, PersonalData
 from .forms import RentalForm, ReservationForm
 from .models import Rental, Reservation, Image
 from django.http import JsonResponse
@@ -138,6 +140,13 @@ def toggle_reservation_approval(request, reservation_id):
 
 def one_rental(request, rental_id):
     rental = get_object_or_404(Rental, id=rental_id)
-    return render(request, 'one_rental.html', {'rental': rental})
+    user = rental.user
+    personal_data_entries = PersonalData.objects.filter(user=user)
+    phone_numbers = [pd.phone_number for pd in personal_data_entries] if personal_data_entries else None
+    create_reservation_content = create_reservation(request, rental_id).content
+
+    return render(request, 'one_rental.html', {'rental': rental, 'phone_numbers': phone_numbers, 'create_reservation_content': create_reservation_content})
+
+
 
 
