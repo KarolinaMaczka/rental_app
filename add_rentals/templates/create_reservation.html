@@ -4,8 +4,9 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
 </head>
 
 <header>
@@ -22,19 +23,24 @@
 </header>
 
 <body>
-<form method="post" id="reservationForm" data-rental-id="{{ rental.id }}" class="standard-form">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Book Reservation</button>
-</form>
+<div id="content">
 
-{% if messages %}
-    {% for message in messages %}
-        <div class="alert {{ message.tags }}">
-            {{ message }}
-        </div>
-    {% endfor %}
-{% endif %}
+    <h1>Create Reservation</h1>
+    <form method="post" id="reservationForm" data-rental-id="{{ rental.id }}" class="standard-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Book Reservation</button>
+    </form>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
 
 <script>
     document.getElementById('reservationForm').addEventListener('submit', function(event) {

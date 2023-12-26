@@ -2,7 +2,8 @@
 @import 'mixins';
 
 .standard-form{
-  @include standard-form
+  @include standard-form;
+  font-family: $font-stack;
 }
 
 #content{
@@ -17,5 +18,9 @@
 
   h1 {
     @include large-title;
+  }
+
+  .alert{
+    @include error-text;
   }
 }

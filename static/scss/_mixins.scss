@@ -128,9 +128,8 @@
         @include form-button;
     }
 
-    .error {
-        color: $error-color;
-        margin-top: 20px;
+    .alert {
+        @include error-text;
     }
 }
 
@@ -202,4 +201,11 @@
           margin: 0;
       }
   }
+}
+
+@mixin error-text {
+  color: $error-color;
+  font-size: 1.25em;
+  margin: 20px;
+  text-align: center;
 }

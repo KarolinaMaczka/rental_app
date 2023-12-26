@@ -75,8 +75,7 @@ body, html {
       }
 
       .error {
-        color: $error-color;
-        font-size: 1.35em;
+        @include error-text;
       }
     }
 
