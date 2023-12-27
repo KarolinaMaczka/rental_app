@@ -41,7 +41,7 @@ def register(request):
         #     return render(request, 'register.html', {'error': 'Email already in use'})
 
         # Create user and user profile
-        user = User.objects.create_user(username=username, email=email, password=password)
+        user = User.objects.create_user(username=username, email=email, password=password,  is_active=False)
         profile = UserProfile.objects.create(user=user, first_name=first_name, surname=surname )
 
         # Send email with activation link
