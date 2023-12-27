@@ -8,6 +8,9 @@ html {
       margin-top: $header-height;
       .main-container {
         @include vertical-div;
+        .large-title {
+          text-transform: uppercase;
+        }
         .product-details {
           .image-container {
             display: flex;
@@ -139,4 +142,8 @@ html {
         }
       }
   }
+}
+
+.large-title {
+  text-transform: uppercase;
 }

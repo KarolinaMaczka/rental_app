@@ -110,7 +110,7 @@ def create_reservation(request, rental_id):
                 reservation.user = request.user
                 reservation.rental = rental
                 reservation.save()
-                return redirect('list_rentals')
+                return redirect('view_personal_data')
     else:
         form = ReservationForm()
     return render(request, 'create_reservation.html', {'form': form, 'rental': rental})

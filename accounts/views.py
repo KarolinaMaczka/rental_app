@@ -1,5 +1,7 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+
+from add_rentals.models import Reservation
 from .models import UserProfile
 from django.conf import settings
 from django.contrib.auth import authenticate, login
@@ -15,7 +17,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.utils.encoding import force_str
-
+from add_rentals.models import Reservation
 
 
 def register(request):
@@ -119,7 +121,15 @@ def logout_view(request):
 @login_required
 def view_personal_data(request):
     user_data = PersonalData.objects.filter(user=request.user)
-    return render(request, 'view_personal_data.html', {'user_data': user_data})
+    user_reservations = Reservation.objects.filter(user=request.user)
+    for reservation in user_reservations:
+        duration = (reservation.end_date - reservation.start_date).days
+        reservation.total_cost = reservation.rental.price_per_night * duration
+
+    return render(request, 'view_personal_data.html', {
+        'user_data': user_data,
+        'user_reservations': user_reservations
+    })
 
 
 @login_required()
@@ -162,3 +172,22 @@ def activate_new_password(request, uidb64, token):
         print("No user")
         messages.error(request, 'The link is invalid, possibly because it has already been used.')
         return redirect('home')
+
+
+@login_required
+def cancel_reservation(request, reservation_id):
+    reservation = get_object_or_404(Reservation, id=reservation_id, user=request.user)
+
+    if reservation.approved:
+        if not any(message.message == "Approved reservations cannot be canceled." for message in messages.get_messages(request)):
+            request.session['cancellation_error_reservation_id'] = reservation.id
+            messages.error(request, "This reservation is already approved and cannot be canceled.")
+        return redirect('view_personal_data')
+
+    if request.method == 'POST':
+        reservation.delete()
+        return redirect('view_personal_data')
+
+    return redirect('view_personal_data')
+
+

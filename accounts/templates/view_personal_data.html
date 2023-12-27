@@ -1,21 +1,86 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>View Personal Data</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/manage_account.css' %}">
+    <script src="{% static 'js/fade_in.js' %}"></script>
+
+    <title>Apartments</title>
 </head>
+
+ <header>
+        {% include 'header.html' %}
+     <script>
+        function changeHeaderClass() {
+            var header = document.querySelector('.header-with-gradient');
+            if (header) {
+                header.className = 'normal-header';
+            }
+        }
+        changeHeaderClass();
+    </script>
+    </header>
 <body>
-    <h1>Your Personal Data</h1>
-    {% for data in user_data %}
-        <div>
-{#            <p><strong>First Name:</strong> {{ data.first_name }}</p>#}
-{#            <p><strong>Surname:</strong> {{ data.surname }}</p>#}
-            <p><strong>Address:</strong> {{ data.address }}</p>
-            <p><strong>Phone Number:</strong> {{ data.phone_number }}</p>
-        </div>
+    <div class="main-container">
+        {% with request.user.userprofile as profile %}
+            <h1>Hi, {{ profile.first_name }} {{ profile.surname }}</h1>
+        {% endwith %}
         <hr>
-    {% empty %}
-        <p>No personal data found.</p>
-    {% endfor %}
+
+        <h2>Your Personal Data</h2>
+        {% for data in user_data %}
+            <div class="personal-data">
+                {% if data.address %}
+                    <p><strong>Address:</strong> {{ data.address }}</p>
+                {% endif %}
+                {% if data.phone_number %}
+                    <p><strong>Phone Number:</strong> {{ data.phone_number }}</p>
+                {% endif %}
+            </div>
+            {% if data.address or data.phone_number %}
+
+            {% endif %}
+        {% empty %}
+            <p>No personal data found.</p>
+        {% endfor %}
+        <a href="{% url 'add_personal_data' %}" class="add-data-btn">Add new personal data</a>
+        <hr>
+
+        <h2>Your Reservations</h2>
+        <hr>
+       <div class="reservation-list">
+            {% for reservation in user_reservations %}
+                <div class="reservation">
+                    <p><strong>Rental Name:</strong> {{ reservation.rental.name }}</p>
+                    <p><strong>Rental owner:</strong> {{ reservation.rental.user.first_name }} {{ reservation.rental.user.surname }}</p>
+                    <p><strong>Start Date:</strong> {{ reservation.start_date }}</p>
+                    <p><strong>End Date:</strong> {{ reservation.end_date }}</p>
+                    <p><strong>Total Cost:</strong> {{ reservation.total_cost }}</p>
+                    <p><strong>Status:</strong> {{ reservation.approved|yesno:"Approved,Not Approved" }}</p>
+                <div class="buttons-div">
+                    <a href="{% url 'one_rental' reservation.rental.id %}" class="see-more-btn">See Details</a>
+                    <form method="post" action="{% url 'cancel_reservation' reservation.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="cancel-btn">Cancel Reservation</button>
+                    </form>
+                </div>
+                    {% if request.session.cancellation_error_reservation_id == reservation.id %}
+                        {% for message in messages %}
+                            <div class="alert {{ message.tags }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <hr>
+            {% empty %}
+                <p>No reservations found.</p>
+            {% endfor %}
+        </div>
+    </div>
 
 </body>
 </html>
