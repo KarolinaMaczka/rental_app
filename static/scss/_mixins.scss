@@ -100,22 +100,34 @@
 }
 
 @mixin standard-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
+  font-family: "Courier", monospace;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 0 auto;
+  width: 60%;
+  font-family: "Courier", monospace;
 
-    input[type="text"],
-    input[type="email"],
-    input[type="password"] {
-        background-color: transparent;
-        border: none;
-        border-bottom: 2px solid black;
-        padding: 10px;
-        margin: 10px 0;
-        width: 80%;
-        box-sizing: border-box;
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  input[type="tel"],
+  input[type="date"],
+  input[type="datetime-local"],
+  input[type="month"],
+  input[type="search"],
+  input[type="time"],
+  input[type="url"],
+  textarea,
+  select {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px 0;
+    box-sizing: border-box;
+
+    border: none;
+    border-bottom: 2px solid black;
 
         &:focus {
             outline: none;
@@ -123,10 +135,25 @@
         }
     }
 
-    button[type="submit"] {
-      margin-top: 20px;
-        @include form-button;
-    }
+  input[type="file"] {
+    margin-top: 10px;
+    font-size: 0.7em;
+    font-family: "Courier", monospace;
+  }
+
+  button[type="submit"],
+  input[type="submit"] {
+    margin-top: 20px;
+    @include form-button;
+  }
+
+  button[type="button"],
+  input[type="button"],
+  button[type="reset"],
+  input[type="reset"] {
+    @include form-button;
+    margin-top: 20px;
+  }
 
     .alert {
         @include error-text;

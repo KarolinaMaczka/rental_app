@@ -101,8 +101,10 @@
     <hr>
 </div>
 {% empty %}
-    <p>You haven't created any rentals yet :(</p>
+    <div style="display: flex; flex-direction: column;">
+    <p>You haven't created any rentals yet :( </p>
     <a href="{% url 'add_rental' %}">Click here to create a new rental.</a>
+    </div>
 {% endfor %}
 
 <script>

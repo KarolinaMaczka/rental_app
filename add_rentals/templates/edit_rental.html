@@ -2,17 +2,38 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <title>Update Rental</title>
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
 </head>
+<header>
+    {% include 'header.html' %}
+    <script>
+        function changeHeaderClass() {
+            var header = document.querySelector('.header-with-gradient');
+            if (header) {
+                header.className = 'normal-header';
+            }
+        }
+        changeHeaderClass();
+    </script>
+</header>
 <body>
-    <form method="post" enctype="multipart/form-data" id="rentalForm">
+<div id="content">
+    <h1>Edit Rental Data</h1>
+    <form method="post" enctype="multipart/form-data" id="rentalForm" class="standard-form">
     {% csrf_token %}
     {{ form.as_p }}
     <div id="imageUploadContainer">
     </div>
     <button type="button" id="addImage">Add Another Image</button>
     <button type="submit">Update Rental</button>
-</form>
+    </form>
+</div>
 
 <script>
     document.getElementById('addImage').addEventListener('click', function() {

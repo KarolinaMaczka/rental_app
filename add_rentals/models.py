@@ -4,15 +4,15 @@ from django.contrib.auth.models import User
 
 class Rental(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=100)
-    description = models.TextField(max_length=500)
+    name = models.CharField(max_length=50)
+    description = models.TextField(max_length=400)
     number_of_rooms = models.IntegerField()
     number_of_bathrooms = models.IntegerField()
     price_per_night = models.DecimalField(max_digits=6, decimal_places=2)
     max_guests = models.IntegerField()
     number_of_beds = models.IntegerField()
-    address_city = models.CharField(max_length=100)
-    address_street = models.CharField(max_length=100)
+    address_city = models.CharField(max_length=50)
+    address_street = models.CharField(max_length=50)
 
 
 class Image(models.Model):
