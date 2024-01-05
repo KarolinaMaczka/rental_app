@@ -1,22 +1,125 @@
+{% load static %}
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/list_rentals.css' %}">
+</head>
+
+<header>
+    {% include 'header.html' %}
+    <script>
+        function changeHeaderClass() {
+            var header = document.querySelector('.header-with-gradient');
+            if (header) {
+                header.className = 'normal-header';
+            }
+        }
+        changeHeaderClass();
+    </script>
+</header>
+
+<body>
+
 {% for rental in rentals %}
-<div>
-    <h2>{{ rental.name }}</h2>
-    <a href="{% url 'edit_rental' rental.id %}">Edit</a>
+<div class="rental">
+    <h2>{{ rental.name }}   <a class="edit-button" href="{% url 'edit_rental' rental.id %}">
+        <i class="fas fa-edit"></i>
+    </a></h2>
     <p>{{ rental.description }}</p>
-    <p>Rooms: {{ rental.number_of_rooms }}</p>
-    <p>Bathrooms: {{ rental.number_of_bathrooms }}</p>
-    <p>Price per Night: {{ rental.price_per_night }}</p>
-    <p>Max Guests: {{ rental.max_guests }}</p>
-    <p>Number of Beds: {{ rental.number_of_beds }}</p>
-    <p>City: {{ rental.address_city }}</p>
-    <p>Street: {{ rental.address_street }}</p>
+    <table class="rental-data-table">
+        <tr>
+            <td>Rooms:</td>
+            <td>{{ rental.number_of_rooms }}</td>
+        </tr>
+        <tr>
+            <td>Bathrooms:</td>
+            <td>{{ rental.number_of_bathrooms }}</td>
+        </tr>
+        <tr>
+            <td>Price per Night:</td>
+            <td>{{ rental.price_per_night }}</td>
+        </tr>
+        <tr>
+            <td>Max Guests:</td>
+            <td>{{ rental.max_guests }}</td>
+        </tr>
+        <tr>
+            <td>Number of Beds:</td>
+            <td>{{ rental.number_of_beds }}</td>
+        </tr>
+        <tr>
+            <td>City:</td>
+            <td>{{ rental.address_city }}</td>
+        </tr>
+        <tr>
+            <td>Street:</td>
+            <td>{{ rental.address_street }}</td>
+        </tr>
+    </table>
 
 
     {% for image in rental.images.all %}
         <img src="{{ image.image.url }}" alt="{{ rental.name }}" style="width:200px;height:150px;">
     {% endfor %}
+
+    <h3>Reservations:</h3>
+    <div class="reservation-accordion">
+        {% for reservation in rental.reservation_set.all %}
+        <div class="reservation-item">
+            <div class="reservation-header">
+                <div class="reservation-date">{{ reservation.start_date }} - {{ reservation.end_date }}</div>
+                <button class="reservation-toggle">
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+            <div class="reservation-details" style="display: none;">
+
+                <p>Reserved by: {{ reservation.user.username }}</p>
+                <p>Start Date: {{ reservation.start_date }}</p>
+                <p>End Date: {{ reservation.end_date }}</p>
+
+            <p>Status: {{ reservation.approved|yesno:"Approved,Not Approved" }}</p>
+            <form action="{% url 'toggle_reservation_approval' reservation.id %}" method="post">
+                {% csrf_token %}
+                {% if reservation.approved %}
+                    {% if reservation.can_disapprove %}
+                        <button class='approval-button' type="submit">Disapprove</button>
+                    {% else %}
+                        <button class='approval-button' disabled>Disapprove (less than 5 days left)</button>
+                    {% endif %}
+                {% else %}
+                    <button class='approval-button' type="submit">Approve</button>
+                {% endif %}
+            </form>
+            </div>
+        </div>
+    {% endfor %}
+    <hr>
 </div>
 {% empty %}
     <p>You haven't created any rentals yet :(</p>
     <a href="{% url 'add_rental' %}">Click here to create a new rental.</a>
 {% endfor %}
+
+<script>
+    document.querySelectorAll('.reservation-toggle').forEach(button => {
+    button.addEventListener('click', function() {
+        this.classList.toggle('active');
+        var details = this.parentElement.nextElementSibling;
+        if (details.style.display === "block") {
+            details.style.display = "none";
+            this.innerHTML = '<i class="fas fa-chevron-down"></i>';
+        } else {
+            details.style.display = "block";
+            this.innerHTML = '<i class="fas fa-chevron-up"></i>';
+        }
+    });
+});
+
+</script>
+
+</body>

@@ -1,13 +1,16 @@
+from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
 from accounts.models import UserProfile, PersonalData
+from aplikacja import settings
 from .forms import RentalForm, ReservationForm
 from .models import Rental, Reservation, Image
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
-
+from django.utils import timezone
+from datetime import timedelta
 
 @login_required
 def add_rental(request):
@@ -29,17 +32,21 @@ def add_rental(request):
 
 @login_required
 def list_rentals(request):
-    rentals = Rental.objects.filter(user=request.user)
+    rentals = Rental.objects.filter(user=request.user).prefetch_related('reservation_set')
+
+    for rental in rentals:
+        for reservation in rental.reservation_set.all():
+            days_until = (reservation.start_date - timezone.now().date()).days
+            setattr(reservation, 'can_disapprove', reservation.approved and days_until > 5)
+
     return render(request, 'list_rentals.html', {'rentals': rentals})
 
 
 def all_rentals(request):
-    # Query for unique cities from all rentals
     unique_cities = Rental.objects.values_list('address_city', flat=True).distinct()
 
     rentals = Rental.objects.all()
 
-    # Apply filters
     city = request.GET.get('city')
     if city:
         rentals = rentals.filter(address_city=city)
@@ -124,13 +131,22 @@ def get_booked_dates(request, rental_id):
 
 
 @login_required
-def toggle_reservation_approval(request, reservation_id):
+def toggle_reservation_approval(request, reservation_id, user=None):
     reservation = get_object_or_404(Reservation, id=reservation_id, rental__user=request.user)
 
     if reservation.rental.user == request.user:
         reservation.approved = not reservation.approved
         reservation.save()
         message = 'Reservation approved.' if reservation.approved else 'Reservation not approved.'
+        email_subject = "Reservation Status Changed"
+        email_body = f"Dear {reservation.user.username},\n\nYour reservation for '{reservation.rental.name}' has been {'approved' if reservation.approved else 'disapproved'}."
+        send_mail(
+            email_subject,
+            email_body,
+            settings.EMAIL_HOST_USER,
+            [reservation.user.email],
+            fail_silently=False,
+        )
         messages.success(request, message)
     else:
         messages.error(request, 'You are not authorized to approve this reservation.')
