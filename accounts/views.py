@@ -94,10 +94,6 @@ def home_page(request):
 def register_page(request):
     return render(request, 'register.html')
 
-@login_required
-def secret_page(request):
-    return render(request, 'secret_page.html')
-
 
 @login_required
 def add_personal_data(request):
