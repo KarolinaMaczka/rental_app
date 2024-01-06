@@ -187,3 +187,62 @@ def cancel_reservation(request, reservation_id):
     return redirect('view_personal_data')
 
 
+@login_required
+def edit_personal_data(request, data_id):
+    personal_data_instance = get_object_or_404(PersonalData, id=data_id, user=request.user)
+
+    if request.method == 'POST':
+        form = PersonalDataForm(request.POST, instance=personal_data_instance)
+        if form.is_valid():
+            form.save()
+            return redirect('view_personal_data')
+    else:
+        form = PersonalDataForm(instance=personal_data_instance)
+
+    return render(request, 'edit_personal_data.html', {'form': form})
+
+
+def forgot_password(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        try:
+            user = User.objects.get(username=username)
+            token = default_token_generator.make_token(user)
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            link = request.build_absolute_uri(f'/reset-password/{uid}/{token}/')
+            send_mail(
+                'Password Reset',
+                f'Follow this link to reset your password: {link}',
+                settings.EMAIL_HOST_USER,
+                [user.email],
+                fail_silently=False,
+            )
+            messages.info(request, 'Please check your email to reset your password.')
+            return redirect('home')
+        except User.DoesNotExist:
+            messages.error(request, 'No user found with this username.')
+            return redirect('forgot_password')
+    return render(request, 'forgot_password.html')
+
+
+def reset_password(request, uidb64, token):
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
+    if user is not None and default_token_generator.check_token(user, token):
+        if request.method == 'POST':
+            new_password = request.POST.get('new_password')
+            user.set_password(new_password)
+            user.save()
+            messages.success(request, 'Your password has been reset.')
+            return redirect('login')
+        return render(request, 'reset_password.html', {'uidb64': uidb64, 'token': token})
+    else:
+        messages.error(request, 'The reset link is invalid or has expired.')
+        return redirect('forgot_password')
+
+
+

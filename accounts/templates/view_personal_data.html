@@ -39,6 +39,8 @@
                 {% if data.phone_number %}
                     <p><strong>Phone Number:</strong> {{ data.phone_number }}</p>
                 {% endif %}
+                <a href="{% url 'edit_personal_data' data.id %}" class="edit-data-btn" style="color: black">
+                    <i class="fa fa-edit"></i></a>
             </div>
             {% if data.address or data.phone_number %}
 

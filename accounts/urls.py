@@ -13,5 +13,8 @@ urlpatterns = [
     path('change_password/', views.change_password, name='change_password'),
     path('activate_new_password/<uidb64>/<token>/', views.activate_new_password, name='activate_new_password'),
     path('cancel-reservation/<int:reservation_id>/', views.cancel_reservation, name='cancel_reservation'),
+    path('edit-personal-data/<int:data_id>/', views.edit_personal_data, name='edit_personal_data'),
+    path('forgot-password/', views.forgot_password, name='forgot_password'),
+    path('reset-password/<uidb64>/<token>/', views.reset_password, name='reset_password'),
 
 ]
