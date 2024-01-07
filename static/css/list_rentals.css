@@ -1,0 +1,111 @@
+html {
+  font-family: "Courier", monospace;
+}
+html::-webkit-scrollbar {
+  width: 10px;
+}
+html::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+html::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+html::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+html body {
+  margin-top: 4.5em;
+  display: flex;
+  padding: 0 50px;
+}
+html body .rental {
+  width: 100%;
+  background-color: white;
+  align-items: start;
+}
+html body .rental .edit-button {
+  color: black;
+  font-size: 0.7em;
+  margin-left: 8px;
+}
+html body .rental .edit-button:hover {
+  color: gray;
+}
+html body .rental .rental-data-table {
+  width: auto;
+  border-collapse: collapse;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+html body .rental .rental-data-table tr {
+  border-bottom: 1px solid #ddd;
+}
+html body .rental .rental-data-table tr:last-child {
+  border-bottom: none;
+}
+html body .rental .rental-data-table td {
+  padding: 10px;
+  vertical-align: top;
+}
+html body .rental .rental-data-table td:first-child {
+  font-weight: bold;
+  width: 30%;
+  color: #333;
+}
+html body .rental .rental-data-table td p {
+  margin: 0;
+}
+html body .rental .reservation-accordion .reservation-item {
+  border-bottom: 1px solid #ddd;
+}
+html body .rental .reservation-accordion .reservation-item .reservation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+html body .rental .reservation-accordion .reservation-item .reservation-header .reservation-date {
+  font-weight: bold;
+}
+html body .rental .reservation-accordion .reservation-item .reservation-header .reservation-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+html body .rental .reservation-accordion .reservation-item .reservation-header .reservation-toggle i {
+  color: black;
+}
+html body .rental .reservation-accordion .reservation-item .reservation-details {
+  padding: 10px;
+  display: none;
+}
+html body .rental .reservation-accordion .reservation-item .reservation-details .approval-button {
+  font-size: 1em;
+}
+html body .rental .reservation-accordion .reservation-item:last-child {
+  border-bottom: none;
+}
+
+button:disabled {
+  background-color: lightgray;
+  color: white;
+}
+button:disabledhover {
+  background-color: lightgray;
+  color: black;
+}
+
+hr {
+  margin: 15px 0;
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+img {
+  margin: 5px 5px;
+}
+
+/*# sourceMappingURL=list_rentals.css.map */

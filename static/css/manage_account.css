@@ -1,0 +1,118 @@
+html {
+  font-family: "Courier", monospace;
+}
+html::-webkit-scrollbar {
+  width: 10px;
+}
+html::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+html::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+html::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+html body {
+  margin-top: 4.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+html body .main-container {
+  width: 80%;
+}
+html body .main-container .personal-data, html body .main-container .reservation {
+  background-color: #fff;
+  padding: 5px;
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+html body .main-container .personal-data .buttons-div, html body .main-container .reservation .buttons-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+html body .see-more-btn, html body .cancel-btn {
+  background-color: transparent;
+  color: black;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.5s ease-in-out !important;
+  margin-left: 3px;
+  margin-right: 3px;
+  font-family: "Courier", monospace;
+  font-weight: 900;
+  font-size: 23px;
+  text-decoration: none;
+  font-size: 1.2em;
+  margin: 10px 30px;
+  background-color: #e6e6e6;
+}
+html body .see-more-btn:hover, html body .cancel-btn:hover {
+  background-color: black;
+  opacity: 0.45;
+  color: white;
+}
+html body .see-more-btn:hover i, html body .cancel-btn:hover i {
+  color: white;
+}
+html body .see-more-btn i, html body .cancel-btn i {
+  color: black;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+html body .see-more-btn:not(:has(i)), html body .cancel-btn:not(:has(i)) {
+  padding: 8px;
+}
+html body .add-data-btn {
+  background-color: transparent;
+  color: black;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.5s ease-in-out !important;
+  margin-left: 3px;
+  margin-right: 3px;
+  font-family: "Courier", monospace;
+  font-weight: 900;
+  font-size: 23px;
+  text-decoration: none;
+  font-size: 1.2em;
+  background-color: #e6e6e6;
+  margin-bottom: 15px;
+}
+html body .add-data-btn:hover {
+  background-color: black;
+  opacity: 0.45;
+  color: white;
+}
+html body .add-data-btn:hover i {
+  color: white;
+}
+html body .add-data-btn i {
+  color: black;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+html body .add-data-btn:not(:has(i)) {
+  padding: 8px;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+/*# sourceMappingURL=manage_account.css.map */

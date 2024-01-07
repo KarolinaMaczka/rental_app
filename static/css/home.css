@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background-size: cover;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  transition: all 0.5s ease-in-out;
+  transition: background-image 2s ease-in-out !important;
+  opacity: 1;
+  background-image: url("../../media/basic/background1.jpg");
+}
+
+/*# sourceMappingURL=home.css.map */

@@ -1,0 +1,170 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background-size: cover;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  transition: all 0.4s ease-in-out;
+  transition: background-image 2s ease-in-out !important;
+  opacity: 1;
+  background-image: url("../../media/basic/background1.jpg");
+}
+
+button {
+  background-color: transparent;
+  color: black;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.4s ease-in-out !important;
+  margin-left: 3px;
+  margin-right: 3px;
+  font-family: "Courier", monospace;
+  font-weight: 900;
+  font-size: 23px;
+}
+button:hover {
+  background-color: black;
+  opacity: 0.45;
+  color: white;
+}
+button:hover i {
+  color: white;
+}
+button i {
+  color: black;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+button:not(:has(i)) {
+  padding: 8px;
+}
+
+.fa {
+  font-size: 23px;
+}
+
+#left-button {
+  background-color: transparent;
+  color: black;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.4s ease-in-out !important;
+  margin-left: 3px;
+  margin-right: 3px;
+  font-family: "Courier", monospace;
+  font-weight: 900;
+  font-size: 23px;
+  position: absolute;
+  left: 5px;
+}
+#left-button:hover {
+  background-color: black;
+  opacity: 0.45;
+  color: white;
+}
+#left-button:hover i {
+  color: white;
+}
+#left-button i {
+  color: black;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+#left-button:not(:has(i)) {
+  padding: 8px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  transition: all 0.4s ease-in-out;
+}
+.dropdown .dropbtn {
+  background-color: transparent;
+  color: black;
+  padding: 8px 16px;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+}
+.dropdown .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: black;
+  opacity: 0.45;
+  min-width: 160px;
+  z-index: 1;
+  right: 0;
+  transition: all 0.4s ease-in-out;
+}
+.dropdown .dropdown-content a {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  white-space: nowrap;
+  text-align: center;
+  transition: all 0.4s ease-in-out;
+  font-family: "Courier", monospace;
+  font-size: 18px;
+}
+.dropdown .dropdown-content a:hover {
+  background-color: #f1f1f1;
+  color: black;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.dropdown:hover .dropbtn {
+  background-color: transparent;
+  color: black;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.4s ease-in-out !important;
+  margin-left: 3px;
+  margin-right: 3px;
+  font-family: "Courier", monospace;
+  font-weight: 900;
+  font-size: 23px;
+}
+.dropdown:hover .dropbtn:hover {
+  background-color: black;
+  opacity: 0.45;
+  color: white;
+}
+.dropdown:hover .dropbtn:hover i {
+  color: white;
+}
+.dropdown:hover .dropbtn i {
+  color: black;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+.dropdown:hover .dropbtn:not(:has(i)) {
+  padding: 8px;
+}
+
+#content {
+  opacity: 1;
+  transition: opacity 2s ease;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+/*# sourceMappingURL=base.css.map */

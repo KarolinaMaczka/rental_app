@@ -1,0 +1,191 @@
+html {
+  font-family: "Courier", monospace;
+}
+html body {
+  margin-top: 4.5em;
+}
+html body .main-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  flex-wrap: wrap;
+}
+@media (max-width: 800px) {
+  html body .main-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  html body .main-container .rentals-grid-wrapper {
+    width: 100%;
+  }
+  html body .main-container .filter-section {
+    width: 80%;
+    min-width: 300px;
+  }
+}
+html body .main-container .filter-section {
+  margin-top: 60px;
+  width: 27%;
+  font-family: Courier, monospace;
+  padding: 15px;
+  border-right: 1px solid lightgray;
+}
+html body .main-container .filter-section form table {
+  width: 100%;
+}
+html body .main-container .filter-section form table tr {
+  margin-bottom: 10px;
+}
+html body .main-container .filter-section form table tr td:first-child {
+  width: 70%;
+}
+html body .main-container .filter-section form table tr td {
+  padding: 5px;
+}
+html body .main-container .filter-section form table tr td input, html body .main-container .filter-section form table tr td select, html body .main-container .filter-section form table tr td button {
+  display: block;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid black;
+  padding: 5px;
+  box-sizing: border-box;
+}
+html body .main-container .filter-section form table tr td input[type=submit] {
+  background-color: transparent;
+  color: black;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.5s ease-in-out !important;
+  margin-left: 3px;
+  margin-right: 3px;
+  font-family: "Courier", monospace;
+  font-weight: 900;
+  font-size: 23px;
+  font-size: 1em;
+  max-width: 80px;
+}
+html body .main-container .filter-section form table tr td input[type=submit]:hover {
+  background-color: black;
+  opacity: 0.45;
+  color: white;
+}
+html body .main-container .filter-section form table tr td input[type=submit]:hover i {
+  color: white;
+}
+html body .main-container .filter-section form table tr td input[type=submit] i {
+  color: black;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+html body .main-container .filter-section form table tr td input[type=submit]:not(:has(i)) {
+  padding: 8px;
+}
+html body .main-container .rentals-grid-wrapper {
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto auto;
+  max-width: 1200px;
+}
+html body .main-container .rentals-grid-wrapper .rentals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  justify-content: center;
+  width: 85%;
+}
+html body .main-container .rentals-grid-wrapper .rentals-grid .rental-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  border: 1px solid lightgrey;
+  padding: 15px;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.3s ease;
+  height: 400px;
+  overflow: hidden;
+  margin: 20px;
+  width: 350px;
+}
+html body .main-container .rentals-grid-wrapper .rentals-grid .rental-item:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+html body .main-container .rentals-grid-wrapper .rentals-grid .rental-item .carousel {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+html body .main-container .rentals-grid-wrapper .rentals-grid .rental-item .carousel .image-container {
+  width: 300px;
+  height: 200px;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+html body .main-container .rentals-grid-wrapper .rentals-grid .rental-item .carousel .image-container .carousel-image {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  background-color: black;
+}
+html body .main-container .rentals-grid-wrapper .rentals-grid .rental-item .horizontal-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+html body .main-container .rentals-grid-wrapper .rentals-grid .rental-item .horizontal-div .bold-text {
+  font-family: "Courier", monospace;
+  margin-bottom: 20px;
+  font-size: 1.45em;
+  font-weight: 900;
+  margin-left: 90px;
+}
+html body .main-container .rentals-grid-wrapper .rentals-grid .rental-item .horizontal-div .see-more-btn {
+  background-color: transparent;
+  color: black;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.5s ease-in-out !important;
+  margin-left: 3px;
+  margin-right: 3px;
+  font-family: "Courier", monospace;
+  font-weight: 900;
+  font-size: 23px;
+  text-decoration: none;
+  font-size: 1em;
+  margin-right: 90px;
+}
+html body .main-container .rentals-grid-wrapper .rentals-grid .rental-item .horizontal-div .see-more-btn:hover {
+  background-color: black;
+  opacity: 0.45;
+  color: white;
+}
+html body .main-container .rentals-grid-wrapper .rentals-grid .rental-item .horizontal-div .see-more-btn:hover i {
+  color: white;
+}
+html body .main-container .rentals-grid-wrapper .rentals-grid .rental-item .horizontal-div .see-more-btn i {
+  color: black;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+html body .main-container .rentals-grid-wrapper .rentals-grid .rental-item .horizontal-div .see-more-btn:not(:has(i)) {
+  padding: 8px;
+}
+
+/*# sourceMappingURL=all_rentals.css.map */

@@ -1,0 +1,122 @@
+.standard-form {
+  font-family: "Courier", monospace;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 0 auto;
+  width: 60%;
+  font-family: "Courier", monospace;
+}
+.standard-form input[type=text],
+.standard-form input[type=email],
+.standard-form input[type=password],
+.standard-form input[type=number],
+.standard-form input[type=tel],
+.standard-form input[type=date],
+.standard-form input[type=datetime-local],
+.standard-form input[type=month],
+.standard-form input[type=search],
+.standard-form input[type=time],
+.standard-form input[type=url],
+.standard-form textarea,
+.standard-form select {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin: 10px 0;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid black;
+}
+.standard-form input[type=text]:focus,
+.standard-form input[type=email]:focus,
+.standard-form input[type=password]:focus,
+.standard-form input[type=number]:focus,
+.standard-form input[type=tel]:focus,
+.standard-form input[type=date]:focus,
+.standard-form input[type=datetime-local]:focus,
+.standard-form input[type=month]:focus,
+.standard-form input[type=search]:focus,
+.standard-form input[type=time]:focus,
+.standard-form input[type=url]:focus,
+.standard-form textarea:focus,
+.standard-form select:focus {
+  outline: none;
+  border-bottom-color: gray;
+}
+.standard-form input[type=file] {
+  margin-top: 10px;
+  font-size: 0.7em;
+  font-family: "Courier", monospace;
+}
+.standard-form button[type=submit],
+.standard-form input[type=submit] {
+  margin-top: 20px;
+  padding: 14px;
+  background-color: black;
+  color: white;
+  border: 1px solid black;
+  cursor: pointer;
+  font-size: 1.35em;
+  text-align: center;
+  border-radius: 5px;
+}
+.standard-form button[type=submit]:hover,
+.standard-form input[type=submit]:hover {
+  background-color: #333333;
+  color: #cccccc;
+  border-color: #333333;
+}
+.standard-form button[type=button],
+.standard-form input[type=button],
+.standard-form button[type=reset],
+.standard-form input[type=reset] {
+  padding: 14px;
+  background-color: black;
+  color: white;
+  border: 1px solid black;
+  cursor: pointer;
+  font-size: 1.35em;
+  text-align: center;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+.standard-form button[type=button]:hover,
+.standard-form input[type=button]:hover,
+.standard-form button[type=reset]:hover,
+.standard-form input[type=reset]:hover {
+  background-color: #333333;
+  color: #cccccc;
+  border-color: #333333;
+}
+.standard-form .alert {
+  color: #964B00;
+  font-size: 1.25em;
+  margin: 20px;
+  text-align: center;
+}
+
+#content {
+  width: 60%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 5.4em auto;
+  border: 1px solid lightgrey;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+}
+#content h1 {
+  font-family: "Courier", monospace;
+  font-size: 40px;
+  font-weight: 1400;
+  margin-bottom: 30px;
+  text-align: center;
+}
+#content .alert {
+  color: #964B00;
+  font-size: 1.25em;
+  margin: 20px;
+  text-align: center;
+}
+
+/*# sourceMappingURL=register.css.map */

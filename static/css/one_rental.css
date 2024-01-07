@@ -1,0 +1,250 @@
+html {
+  font-family: "Courier", monospace;
+}
+html::-webkit-scrollbar {
+  width: 10px;
+}
+html::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+html::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+html::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+html body {
+  margin-top: 4.5em;
+}
+html body .main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+html body .main-container .large-title {
+  text-transform: uppercase;
+}
+html body .main-container .product-details .image-container {
+  display: flex;
+}
+html body .main-container .product-details .image-container .image-list {
+  overflow-y: scroll;
+  white-space: nowrap;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  background-color: white;
+  height: 80vh;
+}
+html body .main-container .product-details .image-container .image-list::-webkit-scrollbar {
+  width: 10px;
+}
+html body .main-container .product-details .image-container .image-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+html body .main-container .product-details .image-container .image-list::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+html body .main-container .product-details .image-container .image-list::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+html body .main-container .product-details .image-container .image-list .image-wrapper {
+  display: flex;
+  width: 100px;
+  height: 100px;
+  background-color: white;
+  margin-right: 10px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  align-items: center;
+  justify-content: center;
+}
+html body .main-container .product-details .image-container .image-list .image-wrapper img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+html body .main-container .product-details .image-container .image-list .image-wrapper img:hover {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+html body .main-container .product-details .image-container .main-image {
+  padding: 20px;
+  width: 50vw;
+  height: 80vh;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+html body .main-container .product-details .image-container .main-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+html body .main-container .product-info {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+@media (max-width: 800px) {
+  html body .main-container .product-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+  }
+  html body .main-container .product-info table {
+    width: 80%;
+  }
+  html body .main-container .product-info .desc {
+    align-self: center;
+    width: 80%;
+  }
+  html body .main-container .product-info .desc h2 {
+    font-family: "Courier", monospace;
+    margin-bottom: 20px;
+    font-size: 1.45em;
+    font-weight: 900;
+    text-align: center;
+  }
+  html body .main-container .product-info .desc p {
+    text-align: justify;
+  }
+}
+@media (min-width: 800px) {
+  html body .main-container .product-info table {
+    width: 50%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  html body .main-container .product-info table tr {
+    border-bottom: 1px solid #ddd;
+  }
+  html body .main-container .product-info table tr:last-child {
+    border-bottom: none;
+  }
+  html body .main-container .product-info table td {
+    padding: 10px;
+    vertical-align: top;
+  }
+  html body .main-container .product-info table td:first-child {
+    font-weight: bold;
+    width: 30%;
+    color: #333;
+  }
+  html body .main-container .product-info table td p {
+    margin: 0;
+  }
+  html body .main-container .product-info .desc {
+    align-self: start;
+    width: 50%;
+    padding: 0 50px;
+  }
+  html body .main-container .product-info .desc h2 {
+    font-family: "Courier", monospace;
+    margin-bottom: 20px;
+    font-size: 1.45em;
+    font-weight: 900;
+    text-align: left;
+  }
+  html body .main-container .product-info .desc p {
+    text-align: justify;
+  }
+}
+html body .owner-details-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  align-items: start;
+  margin: 60px;
+}
+html body .owner-details-wrapper .owner-details {
+  width: 50%;
+  align-items: center;
+  justify-content: center;
+}
+html body .owner-details-wrapper .owner-details table {
+  width: 90%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+html body .owner-details-wrapper .owner-details table tr {
+  border-bottom: 1px solid #ddd;
+}
+html body .owner-details-wrapper .owner-details table tr:last-child {
+  border-bottom: none;
+}
+html body .owner-details-wrapper .owner-details table td {
+  padding: 10px;
+  vertical-align: top;
+}
+html body .owner-details-wrapper .owner-details table td:first-child {
+  font-weight: bold;
+  width: 30%;
+  color: #333;
+}
+html body .owner-details-wrapper .owner-details table td p {
+  margin: 0;
+}
+html body .owner-details-wrapper .owner-details .bold-text {
+  font-family: "Courier", monospace;
+  margin-bottom: 20px;
+  font-size: 1.45em;
+  font-weight: 900;
+  font-size: 1em;
+}
+html body .owner-details-wrapper .button-div {
+  width: 50%;
+}
+html body .owner-details-wrapper .button-div .create-res-btn {
+  width: fit-content;
+  background-color: transparent;
+  color: black;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.5s ease-in-out !important;
+  margin-left: 3px;
+  margin-right: 3px;
+  font-family: "Courier", monospace;
+  font-weight: 900;
+  font-size: 23px;
+  text-decoration: none;
+  font-size: 1em;
+  background-color: lightgray;
+}
+html body .owner-details-wrapper .button-div .create-res-btn:hover {
+  background-color: black;
+  opacity: 0.45;
+  color: white;
+}
+html body .owner-details-wrapper .button-div .create-res-btn:hover i {
+  color: white;
+}
+html body .owner-details-wrapper .button-div .create-res-btn i {
+  color: black;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+html body .owner-details-wrapper .button-div .create-res-btn:not(:has(i)) {
+  padding: 8px;
+}
+
+.large-title {
+  text-transform: uppercase;
+}
+
+/*# sourceMappingURL=one_rental.css.map */
