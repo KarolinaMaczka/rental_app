@@ -7,19 +7,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link rel="stylesheet" href="{% static 'css/header.css' %}">
     <link rel="stylesheet" href="{% static 'css/list_rentals.css' %}">
+    <script src="{% static 'js/fade_in.js' %}"></script>
+
 </head>
 
 <header>
     {% include 'header.html' %}
-    <script>
-        function changeHeaderClass() {
-            var header = document.querySelector('.header-with-gradient');
-            if (header) {
-                header.className = 'normal-header';
-            }
-        }
-        changeHeaderClass();
-    </script>
 </header>
 
 <body>
@@ -97,7 +90,12 @@
             </form>
             </div>
         </div>
-    {% endfor %}
+        {% empty %}
+            <div style="display: flex; flex-direction: column;">
+            <p>No one has created any reservations yet :( </p>
+            </div>
+        {% endfor %}
+
     <hr>
 </div>
 {% empty %}
@@ -107,21 +105,7 @@
     </div>
 {% endfor %}
 
-<script>
-    document.querySelectorAll('.reservation-toggle').forEach(button => {
-    button.addEventListener('click', function() {
-        this.classList.toggle('active');
-        var details = this.parentElement.nextElementSibling;
-        if (details.style.display === "block") {
-            details.style.display = "none";
-            this.innerHTML = '<i class="fas fa-chevron-down"></i>';
-        } else {
-            details.style.display = "block";
-            this.innerHTML = '<i class="fas fa-chevron-up"></i>';
-        }
-    });
-});
-
-</script>
+<script src="{% static 'js/reservation_toggle.js' %}"></script>
+</div>
 
 </body>

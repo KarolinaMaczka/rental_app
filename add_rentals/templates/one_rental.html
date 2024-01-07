@@ -10,21 +10,12 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
+    <script src="{% static 'js/fade_in.js' %}"></script>
     <title>Apartments</title>
 </head>
 
 <header>
     {% include 'header.html' %}
-    <script>
-        function changeHeaderClass() {
-            var header = document.querySelector('.header-with-gradient');
-            if (header) {
-                header.className = 'normal-header';
-            }
-        }
-        changeHeaderClass();
-    </script>
 </header>
 
 <body>
@@ -46,30 +37,7 @@
                         <img src="{{ image.image.url }}" alt="{{ rental.name }}" class="carousel-image" style="{{ forloop.first|yesno:',display:none;' }}">
                     {% endfor %}
                 </div>
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    const clickableImages = document.querySelectorAll('.clickable-image');
-
-                    clickableImages.forEach(function(img) {
-                        img.addEventListener('click', function() {
-                            const clickedImageUrl = img.getAttribute('src');
-                            const carouselImages = document.querySelectorAll('.carousel-image');
-                            carouselImages.forEach(function(carouselImg) {
-                                carouselImg.style.display = 'none';
-                            });
-
-                            const matchingCarouselImage = Array.from(carouselImages).find(function(carouselImg) {
-                                return carouselImg.getAttribute('src') === clickedImageUrl;
-                            });
-
-                            if (matchingCarouselImage) {
-                                matchingCarouselImage.style.display = '';
-                            }
-                        });
-                    });
-                });
-            </script>
-
+            <script src="{% static 'js/carousel_image.js' %}"></script>
             </div>
 
         </div>

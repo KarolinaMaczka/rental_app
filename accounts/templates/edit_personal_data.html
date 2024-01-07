@@ -10,18 +10,11 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <script src="{% static 'js/fade_in.js' %}"></script>
+
 </head>
 <header>
     {% include 'header.html' %}
-    <script>
-        function changeHeaderClass() {
-            var header = document.querySelector('.header-with-gradient');
-            if (header) {
-                header.className = 'normal-header';
-            }
-        }
-        changeHeaderClass();
-    </script>
 </header>
 
 <body>
@@ -33,34 +26,7 @@
             <button type="submit">Save Changes</button>
         </form>
     </div>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelector('.standard-form').addEventListener('submit', function(event) {
-        var isValid = true;
-        var messages = [];
-
-        var address = document.getElementsByName('address')[0].value;
-        var phoneNumber = document.getElementsByName('phone_number')[0].value;
-
-        if (!address.trim()) {
-            messages.push('Address is required.');
-            isValid = false;
-        }
-
-        if (!phoneNumber.trim()) {
-            messages.push('Phone number is required.');
-            isValid = false;
-        } else if (!/^\+\d{2} \d{3} \d{3} \d{3}$/.test(phoneNumber)) {
-            messages.push('Phone number is invalid. Necessary format: +xx xxx xxx xxx');
-            isValid = false;
-        }
-
-        if (!isValid) {
-            event.preventDefault();
-            alert('Validation errors:\n' + messages.join('\n'));
-        }
-    });
-});
+<script src="{% static 'js/personal_data_validation.js' %}">
 </script>
 </body>
 </html>

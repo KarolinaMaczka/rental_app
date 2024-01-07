@@ -6,21 +6,11 @@
     <link rel="stylesheet" href="{% static 'css/header.css' %}">
     <link rel="stylesheet" href="{% static 'css/all_rentals.css' %}">
     <script src="{% static 'js/fade_in.js' %}"></script>
-
     <title>Apartments</title>
 </head>
 
 <header>
     {% include 'header.html' %}
-    <script>
-        function changeHeaderClass() {
-            var header = document.querySelector('.header-with-gradient');
-            if (header) {
-                header.className = 'normal-header';
-            }
-        }
-        changeHeaderClass();
-    </script>
 </header>
 
 <body>
@@ -123,37 +113,9 @@
     </div>
 
 </div>
-
 </div>
 
-
-
-
-
-<script>
-
-    document.getElementById('city-input').addEventListener('change', function() {
-        var optionFound = false,
-            datalist = this.list;
-
-        if (this.value === '') {
-            this.setCustomValidity('');
-            return;
-        }
-
-        for (var j = 0; j < datalist.options.length; j++) {
-            if (this.value == datalist.options[j].value) {
-                optionFound = true;
-                break;
-            }
-        }
-        if (optionFound) {
-            this.setCustomValidity('');
-        } else {
-            this.setCustomValidity('Please select a valid city');
-        }
-    });
-
+<script src="{% static 'js/filtering.js' %}">
     window.onload = function() {
         {% for rental in rentals %}
             window['currentImageIndex_{{ rental.id }}'] = 0;
@@ -161,31 +123,10 @@
         {% endfor %}
     };
 
-    function updateCarousel(rentalId) {
-        var images = document.querySelectorAll('#' + rentalId + ' .carousel-image');
-        images.forEach((img, index) => {
-            img.style.display = index === window['currentImageIndex_' + rentalId] ? 'block' : 'none';
-        });
-    }
-
-    function nextImage(rentalId) {
-        if (window['currentImageIndex_' + rentalId] === undefined) window['currentImageIndex_' + rentalId] = 0;
-        var images = document.querySelectorAll('#' + rentalId + ' .carousel-image');
-        window['currentImageIndex_' + rentalId] = (window['currentImageIndex_' + rentalId] + 1) % images.length;
-        updateCarousel(rentalId);
-    }
-
-    function prevImage(rentalId) {
-        if (window['currentImageIndex_' + rentalId] === undefined) window['currentImageIndex_' + rentalId] = 0;
-        var images = document.querySelectorAll('#' + rentalId + ' .carousel-image');
-        window['currentImageIndex_' + rentalId] = (window['currentImageIndex_' + rentalId] - 1 + images.length) % images.length;
-        updateCarousel(rentalId);
-    }
     {% for rental in rentals %}
         window['currentImageIndex_{{ rental.id }}'] = 0;
         updateCarousel('{{ rental.id }}');
     {% endfor %}
-
 </script>
 
 </body>

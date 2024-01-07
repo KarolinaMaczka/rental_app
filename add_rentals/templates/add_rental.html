@@ -10,19 +10,11 @@
     <title>Add Rental</title>
     <link rel="stylesheet" href="{% static 'css/register.css' %}">
     <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <script src="{% static 'js/fade_in.js' %}"></script>
 </head>
 
 <header>
     {% include 'header.html' %}
-    <script>
-        function changeHeaderClass() {
-            var header = document.querySelector('.header-with-gradient');
-            if (header) {
-                header.className = 'normal-header';
-            }
-        }
-        changeHeaderClass();
-    </script>
 </header>
 <body>
 <div id="content">
@@ -37,15 +29,7 @@
 </form>
 </div>
 
-<script>
-    document.getElementById('addImage').addEventListener('click', function() {
-        var container = document.getElementById('imageUploadContainer');
-        var input = document.createElement('input');
-        input.type = 'file';
-        input.name = 'images';
-        container.appendChild(input);
-    });
-</script>
+<script src="{% static 'js/add_image.js' %}"></script>
 <script src="{% static 'js/rental_validation.js' %}"></script>
 
 

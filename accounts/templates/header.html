@@ -1,4 +1,4 @@
-<div class="header-with-gradient">
+<div class="normal-header">
     <button id='left-button' onclick="location.href='{% url 'all_rentals' %}';"> See All</button>
 
     <button onclick="location.href='{% url 'home' %}';"><i class="fa fa-home"></i></button>
@@ -7,12 +7,10 @@
         <div class="dropdown">
             <button class="dropbtn"><i class="fa fa-user"></i></button>
             <div class="dropdown-content">
-{#                <a href="{% url 'view_reservations' %}">See Your Reservations</a>#}
                 <a href="{% url 'list_rentals' %}">See Your Rentals</a>
                 <a href="{% url 'add_rental' %}">Add Rental</a>
                 <a href="{% url 'view_personal_data' %}">Manage Your Account</a>
                 <a href="{% url 'logout' %}">Logout</a>
-
             </div>
         </div>
     {% else %}
