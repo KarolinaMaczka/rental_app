@@ -17,6 +17,12 @@ def add_rental(request):
     if request.method == 'POST':
         form = RentalForm(request.POST, request.FILES)
         if form.is_valid():
+            is_valid, error_messages = validate_rental_data(form.cleaned_data, request.FILES)
+            if not is_valid:
+                for error in error_messages:
+                    messages.error(request, error)
+                return render(request, 'add_rental.html', {'form': form})
+
             rental = form.save(commit=False)
             rental.user = request.user
             rental.save()
@@ -84,6 +90,12 @@ def edit_rental(request, rental_id):
     if request.method == 'POST':
         form = RentalForm(request.POST, request.FILES, instance=rental)
         if form.is_valid():
+            is_valid, error_messages = validate_rental_data(form.cleaned_data, request.FILES)
+            if not is_valid:
+                for error in error_messages:
+                    messages.error(request, error)
+                return render(request, 'add_rental.html', {'form': form})
+
             form.save()
             if request.FILES.getlist('images'):
                 rental.images.all().delete()
@@ -164,5 +176,49 @@ def one_rental(request, rental_id):
     return render(request, 'one_rental.html', {'rental': rental, 'phone_numbers': phone_numbers, 'create_reservation_content': create_reservation_content})
 
 
+def validate_rental_data(form_data, files):
+    messages = []
+
+    max_guests = form_data.get('max_guests')
+    if not max_guests or max_guests < 1 or max_guests > 20:
+        messages.append('Max guests must be between 1 and 20.')
+
+    number_of_rooms = form_data.get('number_of_rooms')
+    if not number_of_rooms or number_of_rooms < 1 or number_of_rooms > 50:
+        messages.append('Number of rooms must be between 1 and 50.')
+
+    number_of_bathrooms = form_data.get('number_of_bathrooms')
+    if not number_of_bathrooms or number_of_bathrooms < 1 or number_of_bathrooms > 50:
+        messages.append('Number of bathrooms must be between 1 and 50.')
+
+    number_of_beds = form_data.get('number_of_beds')
+    if not number_of_beds or number_of_beds < 1 or number_of_beds > 50:
+        messages.append('Number of beds must be between 1 and 50.')
+
+    price_per_night = form_data.get('price_per_night')
+    if not price_per_night or price_per_night < 1 or price_per_night > 10000:
+        messages.append('Price per night must be reasonable.')
+
+    name = form_data.get('name', '').strip()
+    if not name or len(name) > 50:
+        messages.append('Name is required and must be less than 50 characters.')
+
+    description = form_data.get('description', '').strip()
+    if not description or len(description) > 400:
+        messages.append('Description is required and must be less than 400 characters.')
+
+    address_city = form_data.get('address_city', '').strip()
+    if not address_city or len(address_city) > 50:
+        messages.append('City is required and must be less than 50 characters.')
+
+    address_street = form_data.get('address_street', '').strip()
+    if not address_street or len(address_street) > 50:
+        messages.append('Street is required and must be less than 50 characters.')
+
+    image_added = any(file for file in files.getlist('images'))
+    if not image_added:
+        messages.append('At least one image must be added.')
+    is_valid = not messages
+    return is_valid, messages
 
 

@@ -18,6 +18,10 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from django.utils.encoding import force_str
 from add_rentals.models import Reservation
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
+import re
+
 
 
 def register(request):
@@ -28,23 +32,16 @@ def register(request):
         first_name = request.POST['first_name']
         surname = request.POST['surname']
 
+        is_valid, error_messages = validate_user_data(username, first_name, surname, email, password)
+        if not is_valid:
+            return render(request, 'register.html', {'errors': error_messages})
 
-        if not (username and email and password and first_name and surname):
-            return render(request, 'register.html', {'error': 'All fields are required'})
-
-        # Check if username already exists
         if User.objects.filter(username=username).exists():
             return render(request, 'register.html', {'error': 'Username already taken'})
 
-        # # Check if email already exists
-        # if User.objects.filter(email=email).exists():
-        #     return render(request, 'register.html', {'error': 'Email already in use'})
-
-        # Create user and user profile
         user = User.objects.create_user(username=username, email=email, password=password,  is_active=False)
         profile = UserProfile.objects.create(user=user, first_name=first_name, surname=surname )
 
-        # Send email with activation link
         activation_link = f"{request.build_absolute_uri('/activate/')}{profile.activation_token}"
         send_mail(
             'Aktywuj swoje konto',
@@ -57,7 +54,6 @@ def register(request):
         return redirect('login')
 
     return render(request, 'register.html')
-
 
 
 def activate(request, token):
@@ -100,10 +96,14 @@ def add_personal_data(request):
     if request.method == 'POST':
         form = PersonalDataForm(request.POST)
         if form.is_valid():
-            personal_data = form.save(commit=False)
-            personal_data.user = request.user
-            personal_data.save()
-            return redirect('view_personal_data')
+            address = form.cleaned_data['address']
+            phone_number = form.cleaned_data['phone_number']
+            is_valid = validate_personal_data(phone_number, address, request)
+            if is_valid:
+                personal_data = form.save(commit=False)
+                personal_data.user = request.user
+                personal_data.save()
+                return redirect('view_personal_data')
     else:
         form = PersonalDataForm()
     return render(request, 'add_personal_data.html', {'form': form})
@@ -194,7 +194,11 @@ def edit_personal_data(request, data_id):
     if request.method == 'POST':
         form = PersonalDataForm(request.POST, instance=personal_data_instance)
         if form.is_valid():
-            form.save()
+            address = form.cleaned_data['address']
+            phone_number = form.cleaned_data['phone_number']
+            is_valid = validate_personal_data(phone_number, address, request)
+            if is_valid:
+                form.save()
             return redirect('view_personal_data')
     else:
         form = PersonalDataForm(instance=personal_data_instance)
@@ -235,6 +239,11 @@ def reset_password(request, uidb64, token):
     if user is not None and default_token_generator.check_token(user, token):
         if request.method == 'POST':
             new_password = request.POST.get('new_password')
+            error_messages =[]
+            error_messages = validate_password(new_password, error_messages)
+            is_valid = not error_messages
+            if not is_valid:
+                return render(request, 'forgot_password.html', {'errors': error_messages})
             user.set_password(new_password)
             user.save()
             messages.success(request, 'Your password has been reset.')
@@ -245,4 +254,54 @@ def reset_password(request, uidb64, token):
         return redirect('forgot_password')
 
 
+def validate_user_data(username, first_name, surname, email, password):
+    messages = []
 
+    if not username.strip():
+        messages.append('Username is required.')
+    if not first_name.strip():
+        messages.append('Name is required.')
+    if not surname.strip():
+        messages.append('Surname is required.')
+
+    if not email.strip():
+        messages.append('Email is required.')
+    else:
+        try:
+            validate_email(email)
+        except ValidationError:
+            messages.append('Email is invalid.')
+
+    if not password:
+        messages.append('Password is required.')
+    else:
+        messages = validate_password(password, messages)
+    is_valid = not messages
+
+    return is_valid, messages
+
+
+def validate_password(password, messages):
+    if len(password) < 8:
+        messages.append('Password must be at least 8 characters long.')
+    if not any(char.isupper() for char in password):
+        messages.append('Password must contain at least one uppercase letter.')
+    if not any(char.isdigit() for char in password):
+        messages.append('Password must contain at least one digit.')
+    return messages
+
+def validate_personal_data(phone_number, address, request):
+    is_valid = True
+
+    if not address.strip():
+        messages.error(request, 'Address is required.')
+        is_valid = False
+
+    if not phone_number.strip():
+        messages.error(request, 'Phone number is required.')
+        is_valid = False
+    elif not re.match(r'^\+\d{2} \d{3} \d{3} \d{3}$', phone_number):
+        messages.error(request, 'Phone number is invalid. Necessary format: +xx xxx xxx xxx')
+        is_valid = False
+
+    return is_valid
