@@ -9,20 +9,18 @@
 })();
 
 document.addEventListener('DOMContentLoaded', function() {
-    const links = document.querySelectorAll('a[href]'); // Select all links
+    const links = document.querySelectorAll('a[href]');
 
     links.forEach(link => {
         link.addEventListener('click', function(e) {
-            e.preventDefault(); // Prevent the default link behavior
-            const destination = this.href; // Store the URL to navigate to
+            e.preventDefault();
+            const destination = this.href;
 
-            // Apply the fade-out effect to all elements
             fadeOutAllElements();
 
-            // Wait for the fade-out to complete before navigating
             setTimeout(() => {
                 window.location.href = destination;
-            }, 250); // This timeout should be the duration of the fade-out
+            }, 250);
         });
     });
 });
@@ -30,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function fadeOutAllElements() {
     const elements = document.querySelectorAll('*');
     elements.forEach(el => {
-        let opacity = 1; // initial opacity
+        let opacity = 1;
         const fadeEffect = setInterval(() => {
             if (opacity <= 0.1) {
                 clearInterval(fadeEffect);
@@ -39,7 +37,7 @@ function fadeOutAllElements() {
                 opacity -= 0.1;
                 el.style.opacity = opacity;
             }
-        }, 50); // adjust this value to control the speed of the fade-out
+        }, 50);
     });
 }
 

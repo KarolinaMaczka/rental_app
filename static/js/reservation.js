@@ -2,7 +2,7 @@ document.getElementById('reservationForm').addEventListener('submit', function(e
         var startDate = new Date(document.getElementsByName('start_date')[0].value);
         var endDate = new Date(document.getElementsByName('end_date')[0].value);
         var today = new Date();
-        today.setHours(0, 0, 0, 0); // Reset time to 00:00
+        today.setHours(0, 0, 0, 0);
 
         if (startDate < today) {
             event.preventDefault();
