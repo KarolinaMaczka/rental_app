@@ -121,10 +121,10 @@
                         <p>name</p>
                     </td>
                     <td>
-                        {% if rental.user.first_name %}
-                            <p>{{ rental.user.first_name }}</p>
+                        {% if rental.user.userprofile.first_name %}
+                            <p>{{ rental.user.userprofile.first_name }}</p>
                         {% else %}
-                             <p>No name available</p>
+                            <p>No name available</p>
                         {% endif %}
                     </td>
                 </tr>
@@ -133,11 +133,11 @@
                     <p>surname</p>
                 </td>
                 <td>
-                     {% if rental.user.surname %}
-                        <p>{{ rental.user.surname }}</p>
-                     {% else %}
-                         <p>No surname available</p>
-                     {% endif %}
+                     {% if rental.user.userprofile.surname %}
+                        <p>{{ rental.user.userprofile.surname }}</p>
+                    {% else %}
+                        <p>No name available</p>
+                    {% endif %}
                 </td>
              </tr>
             </table>
