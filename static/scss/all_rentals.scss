@@ -3,6 +3,7 @@
 
 html {
     font-family: $font-stack;
+    @include scroll-bar;
     body {
         margin-top: $header-height;
 
