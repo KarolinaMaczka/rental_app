@@ -10,7 +10,7 @@ else
 fi
 
 echo "Aktywacja środowiska"
-source $VENV_NAME/bin/activate
+source $VENV_NAME/Scripts/activate
 
 pip install -r requirements.txt
 
