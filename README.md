@@ -6,3 +6,5 @@
 ![image](https://github.com/KarolinaMaczka/rental_app/assets/108070371/7a8cdee8-e676-42f9-8f51-230ea4bf3396)
 ![image](https://github.com/KarolinaMaczka/rental_app/assets/108070371/ae4f6946-2aa5-4546-87d3-db902bab99c9)
 ![image](https://github.com/KarolinaMaczka/rental_app/assets/108070371/9c1f45b7-2dd1-48a9-85f2-f7c07e6ef54e)
+![image](https://github.com/KarolinaMaczka/rental_app/assets/108070371/1dde4bbf-a15b-46cf-b841-03e0fdf1802e)
+![Uploading image.png…]()
