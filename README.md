@@ -1,0 +1,8 @@
+![image](https://github.com/KarolinaMaczka/rental_app/assets/108070371/b586355d-a83f-456f-8ebe-454b0b7e8eb6)
+![image](https://github.com/KarolinaMaczka/rental_app/assets/108070371/529a53a2-588b-4444-8623-8d88e1b61c21)
+![image](https://github.com/KarolinaMaczka/rental_app/assets/108070371/9ec4603e-680f-4bae-b615-b46f464d6b56)
+![image](https://github.com/KarolinaMaczka/rental_app/assets/108070371/f70d81fe-a5bb-405f-9c0f-ec5d4e5b85a3)
+![image](https://github.com/KarolinaMaczka/rental_app/assets/108070371/9f710fba-59c6-4d2b-8bfa-a49b50e5ea98)
+![image](https://github.com/KarolinaMaczka/rental_app/assets/108070371/7a8cdee8-e676-42f9-8f51-230ea4bf3396)
+![image](https://github.com/KarolinaMaczka/rental_app/assets/108070371/ae4f6946-2aa5-4546-87d3-db902bab99c9)
+![image](https://github.com/KarolinaMaczka/rental_app/assets/108070371/9c1f45b7-2dd1-48a9-85f2-f7c07e6ef54e)
